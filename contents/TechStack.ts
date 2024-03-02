@@ -8,12 +8,11 @@ import prisma from "@/public/images/prisma.svg";
 import zod from "@/public/images/zod.svg";
 import websocket from "@/public/images/websocket.svg";
 import mysql from "@/public/images/mysql.svg";
-
 import mongodb from "@/public/images/mongodb-icon.svg";
 import jwt from "@/public/images/jwt-icon.svg";
 import digitalOcean from "@/public/images/digital-ocean-icon.svg";
 import figma from "@/public/images/figma.svg";
-import grammY from "@/public/images/grammy.svg";
+import grammY from "@/public/images/grammY.svg";
 import azure from "@/public/images/microsoft-azure.svg";
 import { StaticImageData } from "next/image";
 
