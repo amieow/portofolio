@@ -5,7 +5,7 @@ import TextWithLeftLine from "../atoms/TextWithLeftLine";
 export default function HeroSection() {
 	return (
 		<section
-			className=" pt-20 flex flex-col overflow-hidden container"
+			className=" pt-20 pb-20 flex flex-col overflow-hidden container"
 			id="hero">
 			<Typography
 				as="h1"

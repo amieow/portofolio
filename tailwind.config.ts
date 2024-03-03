@@ -7,6 +7,9 @@ module.exports = {
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
 	],
+	// variants: {
+	// 	backgroundColor: ["responsive", "hover", "focus", "active"],
+	// },
 	theme: {
 		container: {
 			center: true,
@@ -42,6 +45,9 @@ module.exports = {
 				primary: "#28D8FF",
 				secondary: "#ED81FF",
 				tertiary: "#112021",
+			},
+			linearGradientColors: {
+				"primary-mix": ["270deg", "#7740FF", "#278990"],
 			},
 		},
 	},

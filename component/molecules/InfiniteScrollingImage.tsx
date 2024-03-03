@@ -19,12 +19,21 @@ const InfiniteScrollingImages = () => {
 		const splide = new Splide(".splide", {
 			type: "loop",
 			drag: "free",
-			perPage: 8,
+			perPage: 20,
 
 			autoScroll: {
 				speed: 2,
 			},
 			breakpoints: {
+				2200: {
+					perPage: 15,
+				},
+				1800: {
+					perPage: 10,
+				},
+				1500: {
+					perPage: 8,
+				},
 				1100: {
 					perPage: 5,
 				},
@@ -50,7 +59,7 @@ const InfiniteScrollingImages = () => {
 	}, []); // Menjalankan efek hanya sekali setelah komponen dipasang
 
 	return (
-		<div className="splide w-full">
+		<div className="splide w-full z-0">
 			<div className="splide__track ">
 				<ul className="splide__list">
 					{/* Buat konten gambar di sini */}
@@ -73,7 +82,9 @@ const InfiniteScrollingImages = () => {
 										/>
 									</li>
 								</TooltipTrigger>
-								<TooltipContent>
+								<TooltipContent
+									side="top"
+									sideOffset={4}>
 									<Typography>{item.name}</Typography>
 								</TooltipContent>
 							</Tooltip>

@@ -5,7 +5,7 @@ const NAVBAR_MENU = [
 	},
 	{
 		title: "Portfolio",
-		link: "#portfolio",
+		link: "#portofolio",
 	},
 	{
 		title: "Services",

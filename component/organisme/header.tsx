@@ -39,7 +39,7 @@ export default function Header({
 				isScrolledDown
 					? "w-full fixed top-0 bg-[#1C3233] animate-showToBottom"
 					: "bg-gradient-to-b from-[#00000050] to-tertiary "
-			} items-center h-[80px] transition-all`}>
+			} items-center z-50 h-[80px] transition-all`}>
 			<header className="container w-full flex items-center justify-between">
 				<Logo />
 				<Navigation

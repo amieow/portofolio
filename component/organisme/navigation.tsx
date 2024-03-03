@@ -17,7 +17,7 @@ const Navigation = ({ NAVBAR_MENU, path }: NavigationProps) => (
 						<Typography
 							thick={"bold"}
 							color={path === menu.link ? "primary" : "default"}
-							className="h-full hover:text-tertiary flex items-center hover:bg-white transition-all px-2 rounded-lg"
+							className="h-full hover:text-white flex items-center gradient-primary-hover transition-all px-2 rounded-lg"
 							size={"subheading2"}>
 							{menu.title}
 						</Typography>

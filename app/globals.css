@@ -7,7 +7,12 @@
 		@apply px-10;
 	}
 }
-
+.gradient-primary {
+	@apply bg-gradient-to-br from-purple-600 to-green-400;
+}
+.gradient-primary-hover {
+	@apply bg-gradient-to-br hover:from-purple-600 hover:to-green-400;
+}
 @media screen and (max-width: 768px) {
 	.container {
 		@apply px-5;
