@@ -35,7 +35,7 @@ const typographyVariant = cva("", {
 			regular: "font-normal",
 		},
 		color: {
-			default: "text-white",
+			default: "text-black dark:text-white",
 			primary: "text-primary",
 		},
 		font: {

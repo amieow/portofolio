@@ -8,14 +8,14 @@ export default function PortofolioSection() {
 	return (
 		<section
 			id="portofolio"
-			className="w-full space-y-40 bg-indigo-950 mt-20 py-10">
+			className="w-full space-y-40 bg-indigo-50 dark:bg-indigo-950 mt-20 py-10">
 			<section className="">
 				<section
 					id="tech-stack"
 					className="w-full flex flex-col gap-3">
 					<Typography
 						as="h2"
-						size={"headline1"}
+						size={"display"}
 						thick={"bold"}
 						font={"montserrat"}
 						className="text-center w-full container "
@@ -30,7 +30,7 @@ export default function PortofolioSection() {
 				id="projects">
 				<Typography
 					as="h2"
-					size={"headline1"}
+					size={"display"}
 					thick={"bold"}
 					font={"montserrat"}
 					className="text-center w-full "
@@ -43,9 +43,10 @@ export default function PortofolioSection() {
 					Here are some projects {`I've`} worked on <br /> some are colaborating
 					with others
 				</Typography>
-				<div className="w-full flex flex-wrap mt-10">
+				<div className="w-full flex flex-wrap md:gap-10 mt-10">
 					{PROJECT_SHOWCASE.map((ITEM, INDEX) => (
 						<CardProject
+							index={INDEX}
 							key={INDEX}
 							{...ITEM}
 						/>

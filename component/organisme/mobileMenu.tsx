@@ -14,7 +14,7 @@ const MobileMenuHeader = ({ NAVBAR_MENU, path }: NavigationProps) => (
 						<Typography
 							thick={"bold"}
 							color={path === menu.link ? "primary" : "default"}
-							className="tracking-[2.4px] hover:underline"
+							className="tracking-[2.4px] text-white hover:underline"
 							size={"subheading1"}>
 							{menu.title}
 						</Typography>

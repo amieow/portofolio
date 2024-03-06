@@ -37,12 +37,13 @@ export default function Header({
 		<header
 			className={`flex ${
 				isScrolledDown
-					? "w-full fixed top-0 bg-[#1C3233] animate-showToBottom"
-					: "bg-gradient-to-b from-[#00000050] to-tertiary "
+					? "w-full sticky top-0 bg-[#1C3233] animate-showToBottom"
+					: "dark:border-0 border-b-2 border-gray-300 dark:bg-gradient-to-b dark:from-[#00000050] dark:to-tertiary "
 			} items-center z-50 h-[80px] transition-all`}>
 			<header className="container w-full flex items-center justify-between">
-				<Logo />
+				<Logo isScrolledDown={isScrolledDown} />
 				<Navigation
+					isScrolledDown={isScrolledDown}
 					NAVBAR_MENU={NAVBAR_MENU}
 					path={path}
 				/>
@@ -50,7 +51,7 @@ export default function Header({
 					<SheetTrigger
 						className="md:hidden cursor-pointer"
 						asChild>
-						<MenuIcon />
+						<MenuIcon className="text-white" />
 					</SheetTrigger>
 					<SheetContent>
 						<SheetTitle asChild>

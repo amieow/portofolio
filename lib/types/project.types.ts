@@ -2,12 +2,13 @@ import { StaticImageData } from "next/image";
 import { UserCollaborator } from "./userCollaborator.types";
 
 export type ProjectTypes = {
-	image: string | StaticImageData;
+	thumbnail: string | StaticImageData;
 	title: string;
 	description: string;
 	shortDescription: string;
 	isColaborating: boolean;
-	dateStart: Date;
+	imageDetail?: (string | StaticImageData)[];
+	dateStart?: Date;
 	dateEnd?: Date;
 	category: "WEBSITE" | "BOT";
 	techStack:

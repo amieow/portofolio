@@ -3,8 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "amieow | about",
-	description: `i'am Amieow , i am experienced a year on front-end web developer related also im learning small about the back-end. based in Yogyakarta, Indonesia`,
+	title: "amieow",
+	description: `i'am Amieow, a developer. based in Yogyakarta, Indonesia`,
 };
 
 export default async function Layout({
