@@ -14,6 +14,7 @@ import Logo from "./logo";
 import Navigation from "./navigation";
 import { MobileMenuHeader } from "./mobileMenu";
 import { NAVBAR_MENU } from "@/contents/Navigation";
+import { cn } from "@/lib/utils";
 export default function Header({
 	rootRef,
 }: {
@@ -51,7 +52,7 @@ export default function Header({
 					<SheetTrigger
 						className="md:hidden cursor-pointer"
 						asChild>
-						<MenuIcon className="text-white" />
+						<MenuIcon className={cn({ "text-white": isScrolledDown })} />
 					</SheetTrigger>
 					<SheetContent>
 						<SheetTitle asChild>

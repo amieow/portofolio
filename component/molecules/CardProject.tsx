@@ -8,6 +8,7 @@ import partnerIcon from "@/public/images/icon/partner-icon.svg";
 import repoIcon from "@/public/images/icon/repository-icon.svg";
 import arrowUpRight from "@/public/images/icon/arrow-up-right.svg";
 import clsx from "clsx";
+import { useMediaQuery } from "react-responsive";
 import {
 	AlertDialog,
 	AlertDialogCancel,
@@ -42,7 +43,7 @@ export default function CardProject({
 	const params = useSearchParams();
 	const isProjectId = params.get("project-key") == index.toString();
 	const [open, setOpen] = React.useState(false);
-
+	const isMobile = useMediaQuery({ query: "(min-width: 1280px)" });
 	const ProjectItem: ProjectTypes = {
 		thumbnail,
 		title,
@@ -58,10 +59,10 @@ export default function CardProject({
 		dateEnd,
 	};
 	useEffect(() => {
-		if (isProjectId) {
+		if (isProjectId && !isMobile) {
 			setOpen(true);
 		}
-	}, [isProjectId]);
+	}, [isProjectId, isMobile]);
 
 	// Gunakan objek 'project' sesuai kebutuhan Anda dalam komponen ini
 
@@ -69,20 +70,29 @@ export default function CardProject({
 		<AlertDialog open={open}>
 			<AlertDialogTrigger asChild>
 				<Link
-					href={{
-						pathname: "/",
-						query: {
-							"project-key": index.toString(),
-						},
-					}}
+					href={
+						isMobile
+							? {
+									pathname: "/",
+									query: {
+										"project-key": index.toString(),
+									},
+							  }
+							: {
+									pathname: "/project",
+									query: {
+										"project-key": index.toString(),
+									},
+							  }
+					}
 					className={clsx(
-						"w-full sm:w-1/2 md:w-96 lg:w-1/3 relative shadow-xl p-1 rounded-xl",
+						"w-full sm:w-[46%] lg:w-1/3 relative shadow-xl p-1 rounded-xl",
 						className,
 					)}
 					{...otherProps}>
 					<div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
 						<div
-							onClick={() => setOpen((prev) => !prev)}
+							onClick={() => isMobile && setOpen((prev) => !prev)}
 							className="relative group w-fit h-fit overflow-hidden">
 							<Image
 								className=" transition group-hover:cursor-pointer w-full h-fit group-hover:scale-110 object-cover object-center"
@@ -96,7 +106,7 @@ export default function CardProject({
 						<div className="px-4 py-2 bg-indigo-100 shadow-xl dark:bg-tertiary">
 							<Typography
 								as="h3"
-								onClick={() => setOpen((prev) => !prev)}
+								onClick={() => isMobile && setOpen((prev) => !prev)}
 								className=" text-lg font-medium mb-3 hover:text-blue-500 hover:underline hover:cursor-pointer">
 								{ProjectItem.title}
 							</Typography>
@@ -111,20 +121,25 @@ export default function CardProject({
 			</AlertDialogTrigger>
 			<AlertDialogPortal>
 				<AlertDialogOverlay onClick={() => setOpen(false)} />
-				<AlertDialogContent className=" bg-transparent p-3 sm:p-3 lg:px-6 border-none">
-					<div className="bg-white max-lg:overflow-y-scroll flex flex-col relative max-lg:pt-14 max-lg:pb-6 p-8 rounded-3xl">
-						<AlertDialogCancel
-							onClick={() => setOpen(false)}
-							className="text-black max-lg:bg-black max-lg:text-white  text-xl bg-transparent absolute top-5 right-5 px-4">
-							x
-						</AlertDialogCancel>
-						<div className="bg-white max-lg:bg-opacity-90 gap-4 lg:gap-8 flex flex-col lg:flex-row w-full">
+				<AlertDialogContent className=" p-3 sm:p-3 lg:px-6 bg-transparent border-none">
+					<div className="bg-white flex flex-col relative max-lg:pt-14 max-lg:pb-6 p-8 rounded-3xl">
+						<Link
+							className="text-black  text-xl bg-transparent absolute top-5 right-5 px-4"
+							href={"/"}>
+							<AlertDialogCancel
+								onClick={() => setOpen(false)}
+								className=" max-lg:text-white">
+								x
+							</AlertDialogCancel>
+						</Link>
+
+						<div className="bg-white group max-lg:bg-opacity-90 overflow-hidden gap-4 lg:gap-8 flex flex-col lg:flex-row w-full">
 							<Image
 								src={ProjectItem.thumbnail}
 								alt={ProjectItem.title}
 								width={600}
 								height={401}
-								className="w-full lg:w-[600px] rounded-2xl"
+								className="w-full transition-transform transform-gpu lg:w-[600px] rounded-2xl"
 							/>
 							<div className="flex flex-col w-full">
 								<Typography
@@ -181,7 +196,7 @@ export default function CardProject({
 									<Typography>{ProjectItem.description}</Typography>
 								</div>
 								<div className="flex flex-col lg:flex-row flex-wrap gap-6 mt-8 lg:mt-auto mb-3">
-									<div className="flex flex-col max-lg:hidden flex-wrap gap-6 mt-8 lg:mt-auto mb-3">
+									<div className="flex max-lg:hidden gap-6 mt-8 lg:mt-auto mb-3">
 										{ProjectItem.links?.demo && (
 											<Link
 												className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
@@ -225,63 +240,6 @@ export default function CardProject({
 											</Link>
 										)}
 									</div>
-									<AlertDialog>
-										<AlertDialogTrigger>
-											<Typography className="flex gap-2 items-center w-full lg:hidden border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg">
-												LInks
-											</Typography>
-										</AlertDialogTrigger>
-										<AlertDialogContent className="rounded-3xl px-4 py-2">
-											<div className="flex flex-col lg:hidden flex-wrap gap-6 mt-8 lg:mt-auto mb-3">
-												{ProjectItem.links?.demo && (
-													<Link
-														className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-														href={ProjectItem.links.demo}>
-														<Typography className="tracking-wide">
-															DEMO
-														</Typography>
-														<Image
-															src={arrowUpRight}
-															alt="arrow direct"
-															width={24}
-															height={24}
-														/>
-													</Link>
-												)}
-												{ProjectItem.links?.repository && (
-													<Link
-														className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-														href={ProjectItem.links.repository}>
-														<Image
-															src={repoIcon}
-															alt="repo icon"
-															width={24}
-															height={24}
-														/>
-														<Typography className="tracking-wide">
-															REPO
-														</Typography>
-													</Link>
-												)}
-
-												{ProjectItem.links?.collaborators && (
-													<Link
-														className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-														href={ProjectItem.links.collaborators}>
-														<Image
-															src={partnerIcon}
-															alt="partner icon"
-															width={24}
-															height={24}
-														/>
-														<Typography className=" tracking-wide">
-															COLLABORATORS
-														</Typography>
-													</Link>
-												)}
-											</div>
-										</AlertDialogContent>
-									</AlertDialog>
 								</div>
 							</div>
 						</div>

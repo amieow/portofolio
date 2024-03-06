@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* width */
+::-webkit-scrollbar {
+	@apply bg-transparent z-0;
+	width: 20px;
+}
+::-webkit-scrollbar-track {
+	@apply bg-transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	@apply bg-gradient-to-br transition-all from-purple-600 to-green-400;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	@apply bg-gradient-to-br transition-all from-purple-800 to-green-600;
+}
 @media screen and (max-width: 1014px) {
 	.container {
 		@apply px-10;

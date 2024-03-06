@@ -5,15 +5,15 @@ const NAVBAR_MENU = [
 	},
 	{
 		title: "Portfolio",
-		link: "#portofolio",
+		link: "/#portofolio",
 	},
 	{
 		title: "Services",
-		link: "#services",
+		link: "/#services",
 	},
 	{
 		title: "Contact",
-		link: "#contact",
+		link: "/#contact",
 	},
 ];
 
