@@ -1,5 +1,6 @@
 import RootLayout from "@/component/organisme/Root.layout";
 import "./globals.css";
+import "./preload.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

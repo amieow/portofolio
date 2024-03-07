@@ -15,22 +15,21 @@ import Navigation from "./navigation";
 import { MobileMenuHeader } from "./mobileMenu";
 import { NAVBAR_MENU } from "@/contents/Navigation";
 import { cn } from "@/lib/utils";
+import Reveal from "../molecules/Reveal";
 export default function Header({
 	rootRef,
 }: {
-	rootRef: RefObject<HTMLDivElement>;
+	rootRef: RefObject<HTMLBodyElement>;
 }) {
 	const path = usePathname();
 	const [isScrolledDown, setScrolledDown] = useState(false);
-	const { scrollYProgress } = useScroll({
-		offset: ["end end", "start start"],
-		target: rootRef,
-	});
+	const { scrollYProgress } = useScroll();
 	scrollYProgress.on("change", (progress) => {
 		const ProgressToPercent = progress * 100;
-		if (ProgressToPercent < 80 && !isScrolledDown) {
+
+		if (ProgressToPercent >= 20 && !isScrolledDown) {
 			setScrolledDown(true);
-		} else if (ProgressToPercent >= 80 && isScrolledDown) {
+		} else if (ProgressToPercent < 20 && isScrolledDown) {
 			setScrolledDown(false);
 		}
 	});

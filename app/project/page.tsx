@@ -2,7 +2,7 @@
 import Typography from "@/component/atoms/ui/typography";
 import PROJECT_SHOWCASE from "@/contents/Projects";
 import { formattedDateDDMMYYYY } from "@/lib/utils";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
@@ -10,10 +10,48 @@ import webIcon from "@/public/images/icon/website-logo.svg";
 import partnerIcon from "@/public/images/icon/partner-icon.svg";
 import repoIcon from "@/public/images/icon/repository-icon.svg";
 import arrowUpRight from "@/public/images/icon/arrow-up-right.svg";
+import packages from "@/public/images/icon/package-icon.svg";
+import { ImageViewer } from "@/component/molecules/image-viewer";
+import Home from "./home";
+import Reveal from "@/component/molecules/Reveal";
+
+const LinkButton = ({
+	children,
+	links,
+	icon,
+	alt,
+	delay = 0,
+}: {
+	children: React.ReactNode;
+	links: string;
+	alt: string;
+	icon: StaticImageData;
+	delay?: number;
+}) => {
+	return (
+		<Reveal delay={delay}>
+			<Link
+				className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
+				href={links}>
+				<Image
+					src={icon}
+					alt={alt}
+					width={24}
+					height={24}
+				/>
+				<Typography className="tracking-wide">{children}</Typography>
+			</Link>
+		</Reveal>
+	);
+};
+
 export default function Page() {
 	const params = useSearchParams();
-	const isProjectId =
-		Number(params.get("project-key")) < PROJECT_SHOWCASE.length;
+	const projectId = Number(params.get("project-key"));
+	const isProjectId = projectId >= 0 && projectId < PROJECT_SHOWCASE.length;
+	if (params.get("project-key") == undefined) {
+		return <Home />;
+	}
 	if (!isProjectId) {
 		return (
 			<>
@@ -36,115 +74,192 @@ export default function Page() {
 					</Typography>
 				</Link>
 				<div className="max-lg:bg-opacity-90 gap-4 lg:gap-8 flex flex-col lg:flex-row w-full">
-					<Image
-						src={ProjectItem.thumbnail}
-						alt={ProjectItem.title}
-						width={600}
-						height={401}
-						className="w-full lg:w-[490px]  xl:w-[600px] rounded-2xl"
-					/>
+					<ImageViewer
+						className="relative w-full h-[300px] sm:h-[400px] lg:w-[490px] xl:w-[600px] rounded-2xl"
+						saus={[{ src: ProjectItem.thumbnail.src, alt: ProjectItem.title }]}>
+						<Image
+							src={
+								ProjectItem.thumbnail.staticImage || ProjectItem.thumbnail.src
+							}
+							alt={ProjectItem.title}
+							fill
+							className="rounded-3xl object-cover cursor-pointer"
+						/>
+					</ImageViewer>
 					<div className="flex flex-col w-full">
-						<Typography
-							as="h2"
-							thick={"bolder"}
-							size={"headline1"}>
-							{ProjectItem.title}
-						</Typography>
+						<Reveal side="left">
+							<Typography
+								as="h2"
+								thick={"bolder"}
+								size={"headline1"}>
+								{ProjectItem.title}
+							</Typography>
+						</Reveal>
 						<div className="flex w-full justify-between">
-							<Typography>
-								{ProjectItem.dateStart
-									? `${formattedDateDDMMYYYY(ProjectItem.dateStart)} - ${
-											ProjectItem.dateEnd
-												? formattedDateDDMMYYYY(ProjectItem.dateEnd)
-												: "Present"
-									  }`
-									: "unknown time"}
-							</Typography>
-							<Typography>
-								{ProjectItem.category == "WEBSITE" ? (
-									<Image
-										src={webIcon}
-										alt="web-icon"
-										width={28}
-										height={28}
-									/>
-								) : (
-									"BOT"
-								)}
-							</Typography>
+							<Reveal
+								side="left"
+								delay={0.1}>
+								<Typography>
+									{ProjectItem.dateStart
+										? `${formattedDateDDMMYYYY(ProjectItem.dateStart)} - ${
+												ProjectItem.dateEnd
+													? formattedDateDDMMYYYY(ProjectItem.dateEnd)
+													: "Present"
+										  }`
+										: "unknown time"}
+								</Typography>
+							</Reveal>
+							<Reveal
+								side="right"
+								delay={0.1}>
+								<Typography>
+									{ProjectItem.category == "WEBSITE" ? (
+										<Image
+											src={webIcon}
+											alt="web-icon"
+											width={28}
+											height={28}
+										/>
+									) : (
+										"BOT"
+									)}
+								</Typography>
+							</Reveal>
 						</div>
 						<div className="flex flex-col gap-2">
-							<Typography
-								size={"subheading2"}
-								thick={"bold"}>
-								Tech stack
-							</Typography>
+							<Reveal side="left">
+								<Typography
+									size={"subheading2"}
+									thick={"bold"}>
+									Tech stack
+								</Typography>
+							</Reveal>
 							<div className="flex gap-2 flex-wrap">
 								{ProjectItem.techStack.map((tech, index) => (
-									<Typography
+									<Reveal
 										key={index}
-										className="px-3 py-1 gradient-primary text-white rounded-lg">
-										{tech}
-									</Typography>
+										side="left"
+										delay={index * 0.3}>
+										<Typography
+											key={index}
+											className="px-3 py-1 gradient-primary text-white rounded-lg">
+											{tech}
+										</Typography>
+									</Reveal>
 								))}
 							</div>
 						</div>
-						<div>
-							<Typography
-								size={"subheading2"}
-								thick={"bold"}>
-								Description
-							</Typography>
-							<Typography>{ProjectItem.description}</Typography>
+						<div className="mt-5">
+							<Reveal side="left">
+								<Typography
+									size={"subheading2"}
+									className=" mb-2"
+									thick={"bold"}>
+									Description
+								</Typography>
+							</Reveal>
+							<Reveal
+								side="left"
+								delay={0.1}>
+								<Typography className="whitespace-pre-wrap">
+									{"\t\t" + ProjectItem.description}
+								</Typography>
+							</Reveal>
 						</div>
-						<div className="flex flex-col lg:flex-row flex-wrap gap-6 mt-8 lg:mt-auto mb-3">
-							<div className="flex max-lg:flex-col max-xl:lg:justify-between gap-6 mt-8 xl:mt-auto mb-3">
-								{ProjectItem.links?.demo && (
-									<Link
-										className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-										href={ProjectItem.links.demo}>
-										<Typography className="tracking-wide">DEMO</Typography>
-										<Image
-											src={arrowUpRight}
-											alt="arrow direct"
-											width={24}
-											height={24}
-										/>
-									</Link>
-								)}
-								{ProjectItem.links?.repository && (
-									<Link
-										className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-										href={ProjectItem.links.repository}>
-										<Image
-											src={repoIcon}
-											alt="repo icon"
-											width={24}
-											height={24}
-										/>
-										<Typography className="tracking-wide">REPO</Typography>
-									</Link>
-								)}
+						<div className="flex max-sm:flex-grow flex-col lg:flex-row flex-wrap gap-6 mt-8 mb-3">
+							{ProjectItem.links?.demo && (
+								<LinkButton
+									links={ProjectItem.links.demo}
+									alt="demo icon"
+									icon={arrowUpRight}
+									delay={0.2}>
+									DEMO
+								</LinkButton>
+							)}
 
-								{ProjectItem.links?.collaborators && (
-									<Link
-										className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-										href={ProjectItem.links.collaborators}>
-										<Image
-											src={partnerIcon}
-											alt="partner icon"
-											width={24}
-											height={24}
-										/>
-										<Typography className=" tracking-wide">
-											COLLABORATORS
-										</Typography>
-									</Link>
-								)}
-							</div>
+							{ProjectItem.links?.repository && (
+								<LinkButton
+									links={ProjectItem.links.repository}
+									alt="repo icon"
+									icon={repoIcon}
+									delay={0.4}>
+									REPO
+								</LinkButton>
+							)}
+
+							{ProjectItem.links?.collaborators && (
+								// <Link
+								// 	className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
+								// 	href={ProjectItem.links.collaborators}>
+								// 	<Image
+								// 		src={partnerIcon}
+								// 		alt="partner icon"
+								// 		width={24}
+								// 		height={24}
+								// 	/>
+								// 	<Typography className=" tracking-wide">
+								// 		COLLABORATORS
+								// 	</Typography>
+								// </Link>
+								<LinkButton
+									links={ProjectItem.links.collaborators}
+									alt="partner icon"
+									icon={partnerIcon}
+									delay={0.6}>
+									COLLABORATORS
+								</LinkButton>
+							)}
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className="flex justify-between">
+				{projectId - 1 >= 0 ? (
+					<Link
+						className="px-4 py-2 gap-2 bg-gray-200 hover:bg-gray-400 transition-all flex items-center rounded-lg"
+						href={{
+							pathname: "/project",
+							query: {
+								"project-key": projectId - 1,
+							},
+						}}>
+						<Typography thick={"bold"}>{`< Previous`}</Typography>
+					</Link>
+				) : (
+					<div></div>
+				)}
+				<Link
+					className="px-6 py-3 flex gap-2 bg-gray-200 hover:bg-gray-400 transition-all rounded-lg"
+					href={{
+						pathname: "/project",
+					}}>
+					<Image
+						src={packages}
+						alt="package icon"
+						width={24}
+						height={24}
+					/>
+					<Typography
+						className="max-[470px]:hidden"
+						thick={"bold"}>
+						{" "}
+						All Project
+					</Typography>
+				</Link>
+				{projectId + 1 < PROJECT_SHOWCASE.length ? (
+					<Link
+						className="px-4 py-2 gap-2 bg-gray-200 hover:bg-gray-400 transition-all flex rounded-lg items-center"
+						href={{
+							pathname: "/project",
+							query: {
+								"project-key": projectId + 1,
+							},
+						}}>
+						<Typography thick={"bold"}>{`Next >`}</Typography>
+					</Link>
+				) : (
+					<div></div>
+				)}
 			</div>
 		</section>
 	);

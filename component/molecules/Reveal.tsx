@@ -1,0 +1,80 @@
+"use client";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { useRef, useEffect } from "react";
+type RevealProps = {
+	side?: "left" | "right" | "top" | "bottom";
+	side2?: "left" | "right" | "top" | "bottom";
+	width?: "fit-content" | "100%";
+	animation_gap?: "full" | "half" | "100";
+	delay?: number;
+	wannaOverflow?: boolean;
+	wannaSlide?: boolean;
+	children: React.ReactNode;
+};
+
+export default function Reveal({
+	side = "bottom",
+	side2,
+	width = "fit-content",
+	animation_gap = "100",
+	wannaOverflow = false,
+	delay = 0,
+	children,
+}: RevealProps) {
+	let gap: string | number = 100;
+	if (animation_gap === "full") {
+		gap = "100%";
+	}
+	if (animation_gap === "half") {
+		gap = "50%";
+	}
+	const ref = useRef(null);
+	const inView = useInView(ref, { once: true });
+	const mainControl = useAnimation();
+	useEffect(() => {
+		if (inView) {
+			mainControl.start("visible");
+		}
+	}, [inView, mainControl]);
+	return (
+		<div
+			ref={ref}
+			style={{
+				position: "relative",
+				width,
+				overflow: wannaOverflow ? "visible" : "hidden",
+			}}>
+			<motion.div
+				variants={{
+					visible: {
+						opacity: 1,
+						x: 0,
+						y: 0,
+						transition: {
+							delay,
+							duration: 0.5,
+						},
+					},
+					hidden: {
+						opacity: 0,
+						y:
+							side === "top" || side2 === "top"
+								? `-${gap}`
+								: side === "bottom" || side2 === "left"
+								? gap
+								: 0,
+						x:
+							side == "right" || side2 === "right"
+								? gap
+								: side === "left" || side2 === "left"
+								? `-${gap}`
+								: 0,
+					},
+				}}
+				initial="hidden"
+				animate={mainControl}>
+				{children}
+			</motion.div>
+		</div>
+	);
+}

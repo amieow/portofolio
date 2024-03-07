@@ -50,3 +50,21 @@
 		transform: rotate(45deg);
 	}
 }
+/* @keyframes blink {
+	0% {
+		translate: 100vw 0;
+	}
+	100% {
+		right: 0;
+	}
+}
+
+.blink-button {
+	@apply relative overflow-hidden;
+}
+.blink-button::before {
+	@apply absolute -top-32 z-10 left-0 h-64 w-2 rotate-45 bg-green-700;
+	content: "";
+
+	animation: blink 1400ms infinite;
+} */

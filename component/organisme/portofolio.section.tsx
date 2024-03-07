@@ -3,6 +3,7 @@ import Typography from "../atoms/ui/typography";
 import InfiniteScrollingImages from "../molecules/InfiniteScrollingImage";
 import PROJECT_SHOWCASE from "@/contents/Projects";
 import CardProject from "../molecules/CardProject";
+import Reveal from "../molecules/Reveal";
 
 export default function PortofolioSection() {
 	return (
@@ -13,16 +14,24 @@ export default function PortofolioSection() {
 				<section
 					id="tech-stack"
 					className="w-full flex flex-col gap-3">
-					<Typography
-						as="h2"
-						size={"display"}
-						thick={"bold"}
-						font={"montserrat"}
-						className="text-center w-full container "
-						color="primary">
-						Tech Stack 🧑‍💻
-					</Typography>
-					<InfiniteScrollingImages />
+					<Reveal width="100%">
+						<Typography
+							as="h2"
+							size={"display"}
+							thick={"bold"}
+							font={"montserrat"}
+							className="text-center w-full container "
+							color="primary">
+							Tech Stack 🧑‍💻
+						</Typography>
+					</Reveal>
+					<Reveal
+						side="bottom"
+						delay={0.4}
+						width="100%"
+						side2="right">
+						<InfiniteScrollingImages />
+					</Reveal>
 				</section>
 			</section>
 			<section

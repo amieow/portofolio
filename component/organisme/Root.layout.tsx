@@ -39,7 +39,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				ref={rootRef}
-				className={`bg-[#fbfaf5] dark:bg-tertiary text-black dark:text-white relative min-h-screen ${poppins.variable} ${inter.variable} ${montserrat.variable} ${firaCode.variable}`}>
+				className={`bg-[#fafdfc] dark:bg-tertiary text-black dark:text-white relative min-h-screen ${poppins.variable} ${inter.variable} ${montserrat.variable} ${firaCode.variable}`}>
 				<Header rootRef={rootRef} />
 				{children}
 			</body>

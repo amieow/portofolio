@@ -3,24 +3,20 @@ import { ProjectTypes } from "@/lib/types/project.types";
 import React, { useEffect } from "react";
 import Typography from "../atoms/ui/typography";
 import Image from "next/image";
-import webIcon from "@/public/images/icon/website-logo.svg";
-import partnerIcon from "@/public/images/icon/partner-icon.svg";
-import repoIcon from "@/public/images/icon/repository-icon.svg";
-import arrowUpRight from "@/public/images/icon/arrow-up-right.svg";
 import clsx from "clsx";
 import { useMediaQuery } from "react-responsive";
 import {
 	AlertDialog,
-	AlertDialogCancel,
 	AlertDialogContent,
 	AlertDialogOverlay,
 	AlertDialogPortal,
-	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "../atoms/ui/alert-dialog";
-import { formattedDateDDMMYYYY } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import ModalProject from "./ModalProject";
+import { cn } from "@/lib/utils";
+import Reveal from "./Reveal";
 type CardProjectProps = ProjectTypes & React.ComponentPropsWithoutRef<"a">;
 
 export default function CardProject({
@@ -38,8 +34,9 @@ export default function CardProject({
 	index,
 	isColaborating,
 	className,
+	isBig,
 	...otherProps
-}: CardProjectProps & { index: number }) {
+}: CardProjectProps & { index: number; isBig?: boolean }) {
 	const params = useSearchParams();
 	const isProjectId = params.get("project-key") == index.toString();
 	const [open, setOpen] = React.useState(false);
@@ -70,49 +67,47 @@ export default function CardProject({
 		<AlertDialog open={open}>
 			<AlertDialogTrigger asChild>
 				<Link
-					href={
-						isMobile
-							? {
-									pathname: "/",
-									query: {
-										"project-key": index.toString(),
-									},
-							  }
-							: {
-									pathname: "/project",
-									query: {
-										"project-key": index.toString(),
-									},
-							  }
-					}
+					href={{
+						pathname: "/project",
+						query: {
+							"project-key": index.toString(),
+						},
+					}}
 					className={clsx(
-						"w-full sm:w-[46%] lg:w-1/3 relative shadow-xl p-1 rounded-xl",
+						"w-full sm:w-[46%] lg:w-[30%] relative shadow-xl p-3 rounded-xl",
 						className,
 					)}
 					{...otherProps}>
 					<div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
 						<div
 							onClick={() => isMobile && setOpen((prev) => !prev)}
-							className="relative group w-fit h-fit overflow-hidden">
+							className={cn("relative group w-full h-[200px] overflow-hidden", {
+								"h-[300px]": isBig,
+							})}>
 							<Image
 								className=" transition group-hover:cursor-pointer w-full h-fit group-hover:scale-110 object-cover object-center"
-								src={ProjectItem.thumbnail}
+								src={
+									ProjectItem.thumbnail.staticImage || ProjectItem.thumbnail.src
+								}
 								alt="blog"
-								width={400}
-								height={100}
+								fill
 								style={{ transformOrigin: "center" }}
 							/>
 						</div>
 						<div className="px-4 py-2 bg-indigo-100 shadow-xl dark:bg-tertiary">
-							<Typography
-								as="h3"
-								onClick={() => isMobile && setOpen((prev) => !prev)}
-								className=" text-lg font-medium mb-3 hover:text-blue-500 hover:underline hover:cursor-pointer">
-								{ProjectItem.title}
-							</Typography>
-							<p className="leading-relaxed mb-3">
-								{ProjectItem.shortDescription}
-							</p>
+							<Reveal>
+								<Typography
+									as="h3"
+									onClick={() => isMobile && setOpen((prev) => !prev)}
+									className=" text-lg font-medium mb-3 hover:text-blue-500 hover:underline hover:cursor-pointer">
+									{ProjectItem.title}
+								</Typography>
+							</Reveal>
+							<Reveal>
+								<p className="leading-relaxed mb-3">
+									{ProjectItem.shortDescription}
+								</p>
+							</Reveal>
 							{/* menu bawah */}
 							<div className="flex items-center flex-wrap"></div>
 						</div>
@@ -122,128 +117,10 @@ export default function CardProject({
 			<AlertDialogPortal>
 				<AlertDialogOverlay onClick={() => setOpen(false)} />
 				<AlertDialogContent className=" p-3 sm:p-3 lg:px-6 bg-transparent border-none">
-					<div className="bg-white flex flex-col relative max-lg:pt-14 max-lg:pb-6 p-8 rounded-3xl">
-						<Link
-							className="text-black  text-xl bg-transparent absolute top-5 right-5 px-4"
-							href={"/"}>
-							<AlertDialogCancel
-								onClick={() => setOpen(false)}
-								className=" max-lg:text-white">
-								x
-							</AlertDialogCancel>
-						</Link>
-
-						<div className="bg-white group max-lg:bg-opacity-90 overflow-hidden gap-4 lg:gap-8 flex flex-col lg:flex-row w-full">
-							<Image
-								src={ProjectItem.thumbnail}
-								alt={ProjectItem.title}
-								width={600}
-								height={401}
-								className="w-full transition-transform transform-gpu lg:w-[600px] rounded-2xl"
-							/>
-							<div className="flex flex-col w-full">
-								<Typography
-									as="h2"
-									thick={"bolder"}
-									size={"headline1"}>
-									{ProjectItem.title}
-								</Typography>
-								<div className="flex w-full justify-between">
-									<Typography>
-										{ProjectItem.dateStart
-											? `${formattedDateDDMMYYYY(ProjectItem.dateStart)} - ${
-													ProjectItem.dateEnd
-														? formattedDateDDMMYYYY(ProjectItem.dateEnd)
-														: "Present"
-											  }`
-											: "unknown time"}
-									</Typography>
-									<Typography>
-										{ProjectItem.category == "WEBSITE" ? (
-											<Image
-												src={webIcon}
-												alt="web-icon"
-												width={28}
-												height={28}
-											/>
-										) : (
-											"BOT"
-										)}
-									</Typography>
-								</div>
-								<div className="flex flex-col gap-2">
-									<Typography
-										size={"subheading2"}
-										thick={"bold"}>
-										Tech stack
-									</Typography>
-									<div className="flex gap-2 flex-wrap">
-										{ProjectItem.techStack.map((tech, index) => (
-											<Typography
-												key={index}
-												className="px-3 py-1 gradient-primary text-white rounded-lg">
-												{tech}
-											</Typography>
-										))}
-									</div>
-								</div>
-								<div>
-									<Typography
-										size={"subheading2"}
-										thick={"bold"}>
-										Description
-									</Typography>
-									<Typography>{ProjectItem.description}</Typography>
-								</div>
-								<div className="flex flex-col lg:flex-row flex-wrap gap-6 mt-8 lg:mt-auto mb-3">
-									<div className="flex max-lg:hidden gap-6 mt-8 lg:mt-auto mb-3">
-										{ProjectItem.links?.demo && (
-											<Link
-												className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-												href={ProjectItem.links.demo}>
-												<Typography className="tracking-wide">DEMO</Typography>
-												<Image
-													src={arrowUpRight}
-													alt="arrow direct"
-													width={24}
-													height={24}
-												/>
-											</Link>
-										)}
-										{ProjectItem.links?.repository && (
-											<Link
-												className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-												href={ProjectItem.links.repository}>
-												<Image
-													src={repoIcon}
-													alt="repo icon"
-													width={24}
-													height={24}
-												/>
-												<Typography className="tracking-wide">REPO</Typography>
-											</Link>
-										)}
-
-										{ProjectItem.links?.collaborators && (
-											<Link
-												className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-												href={ProjectItem.links.collaborators}>
-												<Image
-													src={partnerIcon}
-													alt="partner icon"
-													width={24}
-													height={24}
-												/>
-												<Typography className=" tracking-wide">
-													COLLABORATORS
-												</Typography>
-											</Link>
-										)}
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					{/* <ModalProject
+						setOpen={setOpen}
+						ProjectItem={ProjectItem}
+					/> */}
 				</AlertDialogContent>
 			</AlertDialogPortal>
 		</AlertDialog>
