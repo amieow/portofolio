@@ -1,6 +1,8 @@
 "use client";
 import { useRef } from "react";
 import Header from "./header";
+import { Analytics } from "@vercel/analytics/react";
+
 import { Fira_Code, Inter, Poppins, Montserrat } from "next/font/google";
 const inter = Inter({
 	subsets: ["latin"],
@@ -42,6 +44,10 @@ export default function RootLayout({
 				className={`bg-[#fafdfc] dark:bg-tertiary text-black dark:text-white relative min-h-screen ${poppins.variable} ${inter.variable} ${montserrat.variable} ${firaCode.variable}`}>
 				<Header rootRef={rootRef} />
 				{children}
+				<Analytics
+					mode="auto"
+					path={"/"}
+				/>
 			</body>
 		</html>
 	);
