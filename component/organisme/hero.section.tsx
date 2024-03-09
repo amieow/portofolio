@@ -4,21 +4,24 @@ import { Fragment } from "react";
 import PProfile from "@/public/images/photo-profile.png";
 import Image from "next/image";
 import Reveal from "../molecules/Reveal";
+import Link from "next/link";
+import waves from "@/public/images/decoration/wave.svg";
+import waves2 from "@/public/images/decoration/wave (1).svg";
 // import vscode from "@/public/images/icon_vscode.svg";
 const GIMMICK = ["Development", "Webflow", "Implementation"];
 export default function HeroSection() {
 	return (
 		<section
-			className=" pt-20 pb-20 flex max-sm:flex-col-reverse gap-10 overflow-hidden justify-between container"
+			className=" pt-36 hero pb-20 min-h-[77vh] sm:min-h-[90vh] relative flex-col gap-20"
 			id="hero">
-			<div className="flex flex-col overflow-hidden sm:w-[70%]">
+			<div className="flex flex-col overflow-hidden container">
 				<Reveal>
 					<Typography
 						as="h1"
 						color={"primary"}
 						font={"montserrat"}
 						//max-sm:text-[7vw] sm:text-[3em] min-[900px]:
-						className="max-sm:text-[6.7vw] min-[1400px]:text-6xl inline-flex flex-col text-[4vw] font-bold leading-[1.2] tracking-[-0.5px] mb-6 sm:w-fit"
+						className="max-sm:text-[6.7vw] min-[1400px]:text-7xl inline-flex flex-col text-[4vw] font-bold leading-[1.2] tracking-[-0.5px] mb-6 sm:w-fit"
 						thick={"bold"}>
 						<span>
 							{`HI`}
@@ -54,14 +57,16 @@ export default function HeroSection() {
 					))}
 				</div>
 			</div>
-			<div className="relative px-5 py-2 w-full object-cover sm:w-[28%] h-[300px] sm:h-[300px] border-2 border-gray-200 rounded-3xl flex items-center justify-center">
-				<Image
-					src={PProfile}
-					alt="Photo Profile"
-					fill
-					className="rounded-3xl object-cover"
-				/>
-			</div>
+
+			<div className="flex gap-5 sm:gap-10 container"></div>
+			<Image
+				draggable={false}
+				src={waves2}
+				alt="waves"
+				width={"100"}
+				height={"500"}
+				className="w-full absolute bottom-0 "
+			/>
 		</section>
 	);
 }

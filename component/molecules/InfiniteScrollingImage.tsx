@@ -14,6 +14,64 @@ import {
 import "@splidejs/splide/dist/css/splide.min.css";
 import Typography from "../atoms/ui/typography";
 
+export const TechImage = ({
+	index,
+	item,
+}: {
+	index: number;
+	item: (typeof TECH_STACK_MENU)[number];
+}) => {
+	const [open, setOpen] = useState(false);
+	const [isByClick, setIsByClick] = useState(false);
+	useEffect(() => {
+		let delay: NodeJS.Timeout;
+		if (isByClick) {
+			delay = setTimeout(() => {
+				setIsByClick(false);
+			}, 800);
+		} else if (open) {
+			delay = setTimeout(() => {
+				setOpen(false);
+			}, 800);
+		}
+		return () => {
+			clearTimeout(delay);
+		};
+	}, [isByClick, open]);
+	return (
+		<TooltipProvider
+			delayDuration={200}
+			key={index}>
+			<Tooltip
+				open={open || isByClick}
+				key={index}>
+				<TooltipTrigger asChild>
+					<li
+						onClick={() => setIsByClick(true)}
+						onMouseLeave={() => setOpen(false)}
+						onMouseEnter={() => setOpen(true)}
+						key={index}
+						className="splide__slide inline-block p-2 mx-5">
+						<Image
+							src={item.img}
+							alt={item.name}
+							about={item.name}
+							className="mx-auto my-auto"
+							width={75}
+							height={75}
+						/>
+					</li>
+				</TooltipTrigger>
+				<TooltipContent
+					side="top"
+					sideOffset={4}>
+					<Typography>{item.name}</Typography>
+				</TooltipContent>
+			</Tooltip>
+		</TooltipProvider>
+	);
+};
+
 const InfiniteScrollingImages = () => {
 	useEffect(() => {
 		const splide = new Splide(".splide", {
@@ -65,31 +123,11 @@ const InfiniteScrollingImages = () => {
 					{/* Buat konten gambar di sini */}
 					{TECH_STACK_MENU.map((item, index) => {
 						return (
-							<TooltipProvider
-								delayDuration={200}
-								key={index}>
-								<Tooltip key={index}>
-									<TooltipTrigger asChild>
-										<li
-											key={index}
-											className="splide__slide inline-block p-2 mx-5">
-											<Image
-												src={item.img}
-												alt={item.name}
-												about={item.name}
-												className="mx-auto my-auto"
-												width={75}
-												height={75}
-											/>
-										</li>
-									</TooltipTrigger>
-									<TooltipContent
-										side="top"
-										sideOffset={4}>
-										<Typography>{item.name}</Typography>
-									</TooltipContent>
-								</Tooltip>
-							</TooltipProvider>
+							<TechImage
+								key={index}
+								index={index}
+								item={item}
+							/>
 						);
 					})}
 				</ul>

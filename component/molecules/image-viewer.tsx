@@ -13,12 +13,14 @@ interface ImageViewerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const ImageViewer = ({ children, saus, ...props }: ImageViewerProps) => {
 	const [isOpen, setIsOpen] = React.useState(false);
+	const [activeIndex, setActiveIndex] = React.useState(0);
 	const handleChildClick = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>,
 		index: number,
 	) => {
 		// Perform whatever action is needed when a child is clicked here
 		setIsOpen(true);
+		setActiveIndex(index);
 		console.log(`Child ${index} clicked!`);
 	};
 
@@ -37,6 +39,8 @@ export const ImageViewer = ({ children, saus, ...props }: ImageViewerProps) => {
 				visible={isOpen}
 				onClose={() => setIsOpen(false)}
 				images={saus}
+				showTotal
+				activeIndex={activeIndex}
 			/>
 		</div>
 	);

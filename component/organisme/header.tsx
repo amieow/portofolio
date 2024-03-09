@@ -37,7 +37,7 @@ export default function Header({
 		<header
 			className={`flex ${
 				isScrolledDown
-					? "w-full sticky top-0 bg-[#1C3233] animate-showToBottom"
+					? "w-full sticky top-0 bg-[#254142] animate-showToBottom"
 					: "dark:border-0 border-b-2 border-gray-300 dark:bg-gradient-to-b dark:from-[#00000050] dark:to-tertiary "
 			} items-center z-50 h-[80px] transition-all`}>
 			<header className="container w-full flex items-center justify-between">

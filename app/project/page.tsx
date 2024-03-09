@@ -11,9 +11,9 @@ import partnerIcon from "@/public/images/icon/partner-icon.svg";
 import repoIcon from "@/public/images/icon/repository-icon.svg";
 import arrowUpRight from "@/public/images/icon/arrow-up-right.svg";
 import packages from "@/public/images/icon/package-icon.svg";
-import { ImageViewer } from "@/component/molecules/image-viewer";
 import Home from "./home";
 import Reveal from "@/component/molecules/Reveal";
+import ImageSwipper from "./imageSwipper";
 
 const LinkButton = ({
 	children,
@@ -74,18 +74,7 @@ export default function Page() {
 					</Typography>
 				</Link>
 				<div className="max-lg:bg-opacity-90 gap-4 lg:gap-8 flex flex-col lg:flex-row w-full">
-					<ImageViewer
-						className="relative w-full h-[300px] sm:h-[400px] lg:w-[490px] xl:w-[600px] rounded-2xl"
-						saus={[{ src: ProjectItem.thumbnail.src, alt: ProjectItem.title }]}>
-						<Image
-							src={
-								ProjectItem.thumbnail.staticImage || ProjectItem.thumbnail.src
-							}
-							alt={ProjectItem.title}
-							fill
-							className="rounded-3xl object-cover cursor-pointer"
-						/>
-					</ImageViewer>
+					<ImageSwipper ProjectItem={ProjectItem} />
 					<div className="flex flex-col w-full">
 						<Reveal side="left">
 							<Typography
@@ -106,7 +95,7 @@ export default function Page() {
 													? formattedDateDDMMYYYY(ProjectItem.dateEnd)
 													: "Present"
 										  }`
-										: "unknown time"}
+										: " "}
 								</Typography>
 							</Reveal>
 							<Reveal
@@ -188,19 +177,6 @@ export default function Page() {
 							)}
 
 							{ProjectItem.links?.collaborators && (
-								// <Link
-								// 	className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
-								// 	href={ProjectItem.links.collaborators}>
-								// 	<Image
-								// 		src={partnerIcon}
-								// 		alt="partner icon"
-								// 		width={24}
-								// 		height={24}
-								// 	/>
-								// 	<Typography className=" tracking-wide">
-								// 		COLLABORATORS
-								// 	</Typography>
-								// </Link>
 								<LinkButton
 									links={ProjectItem.links.collaborators}
 									alt="partner icon"

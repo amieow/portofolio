@@ -20,7 +20,7 @@ export default function Home() {
 				{PROJECT_SHOWCASE.map((project, index) => (
 					<CardProject
 						key={index}
-						{...project}
+						ProjectItem={project}
 						index={index}
 						isBig
 						className="lg:w-[49%]"

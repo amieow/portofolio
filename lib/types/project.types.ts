@@ -9,11 +9,15 @@ export type ProjectTypes = {
 	title: string;
 	description: string;
 	shortDescription: string;
-	isColaborating: boolean;
+	isColaborating?: boolean;
 	imageDetail?: {
 		src: string;
-		staticImage: StaticImageData;
+		staticImage?: StaticImageData;
 	}[];
+	style?: {
+		img: "cover" | "contain";
+		backgroundColor?: string;
+	};
 	dateStart?: Date;
 	dateEnd?: Date;
 	category: "WEBSITE" | "BOT";
@@ -28,6 +32,9 @@ export type ProjectTypes = {
 				| "lua"
 				| "grammY"
 				| "node.js"
+				| "jwt"
+				| "prisma"
+				| "zod"
 		  )[];
 	myRole?: string;
 	colaborator?: UserCollaborator[];

@@ -9,7 +9,7 @@ export default function PortofolioSection() {
 	return (
 		<section
 			id="portofolio"
-			className="w-full space-y-40 bg-indigo-50 dark:bg-indigo-950 mt-20 py-10">
+			className="w-full space-y-40 bg-indigo-50 dark:bg-indigo-950 pt-20 py-10">
 			<section className="">
 				<section
 					id="tech-stack"
@@ -53,11 +53,11 @@ export default function PortofolioSection() {
 					with others
 				</Typography>
 				<div className="w-full flex flex-wrap md:gap-10 mt-10">
-					{PROJECT_SHOWCASE.map((ITEM, INDEX) => (
+					{PROJECT_SHOWCASE.slice(0, 3).map((ITEM, INDEX) => (
 						<CardProject
 							index={INDEX}
 							key={INDEX}
-							{...ITEM}
+							ProjectItem={ITEM}
 						/>
 					))}
 				</div>
