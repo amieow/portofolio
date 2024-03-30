@@ -3,10 +3,13 @@ import HeroSection from "@/component/organisme/hero.section";
 import PortofolioSection from "@/component/organisme/portofolio.section";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ServicesSection from "@/component/organisme/services.section";
+import AboutSection from "@/component/organisme/about.section";
+import ContactSection from "@/component/organisme/contact.section";
 
 export default function Home() {
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [preloadState, setPreloadState] = useState(1);
+	const [preloadState, setPreloadState] = useState(0);
 
 	useEffect(() => {
 		// Periksa apakah ada nilai "preloadState" yang disimpan di localStorage
@@ -59,9 +62,13 @@ export default function Home() {
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}>
-							<main className="flex flex-col">
+							<main className="flex flex-col relative">
 								<HeroSection />
+								<AboutSection />
 								<PortofolioSection />
+								<ServicesSection />
+								<ContactSection />
+								<div className="absolute -bottom-20 w-full bg-indigo-50 h-20"></div>
 							</main>
 						</motion.div>
 					</AnimatePresence>

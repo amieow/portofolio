@@ -7,9 +7,51 @@ type RevealProps = {
 	width?: "fit-content" | "100%";
 	animation_gap?: "full" | "half" | "100";
 	delay?: number;
+	className?: string;
 	wannaOverflow?: boolean;
 	wannaSlide?: boolean;
 	children: React.ReactNode;
+};
+
+export const revealVariant = ({
+	delay,
+	side2,
+	side,
+	animation_gap,
+}: Omit<RevealProps, "children">) => {
+	let gap: string | number = 100;
+	if (animation_gap === "full") {
+		gap = "100%";
+	}
+	if (animation_gap === "half") {
+		gap = "50%";
+	}
+	return {
+		visible: {
+			opacity: 1,
+			x: 0,
+			y: 0,
+			transition: {
+				delay,
+				duration: 0.5,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			y:
+				side === "top" || side2 === "top"
+					? `-${gap}`
+					: side === "bottom" || side2 === "left"
+					? gap
+					: 0,
+			x:
+				side == "right" || side2 === "right"
+					? gap
+					: side === "left" || side2 === "left"
+					? `-${gap}`
+					: 0,
+		},
+	};
 };
 
 export default function Reveal({
@@ -18,19 +60,15 @@ export default function Reveal({
 	width = "fit-content",
 	animation_gap = "100",
 	wannaOverflow = false,
+	wannaSlide,
 	delay = 0,
 	children,
+	className,
 }: RevealProps) {
-	let gap: string | number = 100;
-	if (animation_gap === "full") {
-		gap = "100%";
-	}
-	if (animation_gap === "half") {
-		gap = "50%";
-	}
 	const ref = useRef(null);
-	const inView = useInView(ref, { once: true });
+	const inView = useInView(ref, { margin: "0px 20px 0px 20px", amount: "all" });
 	const mainControl = useAnimation();
+	const variant = revealVariant({ delay, side2, side, animation_gap });
 	useEffect(() => {
 		if (inView) {
 			mainControl.start("visible");
@@ -41,36 +79,11 @@ export default function Reveal({
 			ref={ref}
 			style={{
 				position: "relative",
-				width,
 				overflow: wannaOverflow ? "visible" : "hidden",
-			}}>
+			}}
+			className={className}>
 			<motion.div
-				variants={{
-					visible: {
-						opacity: 1,
-						x: 0,
-						y: 0,
-						transition: {
-							delay,
-							duration: 0.5,
-						},
-					},
-					hidden: {
-						opacity: 0,
-						y:
-							side === "top" || side2 === "top"
-								? `-${gap}`
-								: side === "bottom" || side2 === "left"
-								? gap
-								: 0,
-						x:
-							side == "right" || side2 === "right"
-								? gap
-								: side === "left" || side2 === "left"
-								? `-${gap}`
-								: 0,
-					},
-				}}
+				variants={variant}
 				initial="hidden"
 				animate={mainControl}>
 				{children}

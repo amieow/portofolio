@@ -1,11 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 /* width */
+
+* {
+	scroll-behavior: smooth;
+}
 ::-webkit-scrollbar {
 	@apply bg-transparent z-0;
-	width: 20px;
+	width: 10px;
 }
 ::-webkit-scrollbar-track {
 	@apply bg-transparent;
@@ -50,21 +53,69 @@
 		transform: rotate(45deg);
 	}
 }
-/* @keyframes blink {
+@keyframes blink {
 	0% {
-		translate: 100vw 0;
+		left: -28px;
 	}
 	100% {
-		right: 0;
+		left: calc(100% + 28px);
+	}
+}
+
+.box-primary:before {
+	content: "";
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(365deg, #63a4ff -100%, #83eaf1 200%);
+	transform: translate3d(0px, 0px, 0) scale(1.27);
+	filter: blur(20px);
+	opacity: var(0.7);
+	transition: opacity 0.3s;
+	border-radius: inherit;
+}
+
+/* 
+* Prevents issues when the parent creates a 
+* stacking context. (For example, using the transform
+* property )
+*/
+.box-primary::after {
+	content: "";
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: inherit;
+	border-radius: inherit;
+}
+
+@keyframes rotateGlowing {
+	from {
+		background: linear-gradient(-0deg, #fff95b 0%, #ff930f 158%);
+	}
+	to {
+		background: linear-gradient(360deg, #fff95b 0%, #ff930f 158%);
 	}
 }
 
 .blink-button {
-	@apply relative overflow-hidden;
+	@apply relative overflow-hidden cursor-pointer;
 }
 .blink-button::before {
-	@apply absolute -top-32 z-10 left-0 h-64 w-2 rotate-45 bg-green-700;
-	content: "";
-
-	animation: blink 1400ms infinite;
-} */
+	@apply absolute -top-24 z-10 -left-[28px] duration-1000 lg:duration-100 -bottom-[15px] h-64 w-2 rotate-45 bg-white;
+	/* content: "";
+	animation: blink 1s infinite linear; */
+}
+#hero {
+	background-image: url("../public/images/decoration/hero.png");
+}
+.blink-button:hover::before {
+	left: calc(100% + 28px);
+	transition: 0.5s;
+}

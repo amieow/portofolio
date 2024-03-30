@@ -13,9 +13,9 @@ export default function Logo({ isScrolledDown }: { isScrolledDown: boolean }) {
 				className={cn(
 					"tracking-[3.2px] gradient-primary text-transparent bg-clip-text max-md:text-2xl shrink-0  cursor-pointer",
 				)}
-				thick={"bolder"}
-				size={"headline1"}
-				font={"code"}>
+				thick={"bold"}
+				size={"headline2"}
+				font={"poppins"}>
 				Amieow | Dev
 			</Typography>
 		</Link>

@@ -1,11 +1,12 @@
-const NAVBAR_MENU = [
+const NAVBAR_MENU: TypeNavbarMenu[] = [
 	{
 		title: "Home",
 		link: "/",
+		section: "",
 	},
 	{
-		title: "Portfolio",
-		link: "/#portofolio",
+		title: "Project",
+		link: "/#project",
 	},
 	{
 		title: "Services",
@@ -17,6 +18,10 @@ const NAVBAR_MENU = [
 	},
 ];
 
-type TypeNavbarMenu = typeof NAVBAR_MENU;
+type TypeNavbarMenu = {
+	title: string;
+	link: string;
+	section?: string;
+};
 
 export { NAVBAR_MENU, type TypeNavbarMenu };

@@ -45,6 +45,7 @@ module.exports = {
 				primary: "#28D8FF",
 				secondary: "#ED81FF",
 				tertiary: "#112021",
+				background: "#fafdfc",
 			},
 			linearGradientColors: {
 				"primary-mix": ["270deg", "#7740FF", "#278990"],

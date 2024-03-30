@@ -5,14 +5,17 @@ import { TypeNavbarMenu } from "@/contents/Navigation";
 import { cn } from "@/lib/utils";
 
 type NavigationProps = {
-	NAVBAR_MENU: TypeNavbarMenu;
+	NAVBAR_MENU: TypeNavbarMenu[];
 	path: string;
+	isScrolledDown: boolean;
+	activeSection: string;
 };
 const Navigation = ({
 	NAVBAR_MENU,
 	path,
+	activeSection,
 	isScrolledDown,
-}: NavigationProps & { isScrolledDown: boolean }) => (
+}: NavigationProps) => (
 	<nav className="gap-4 h-10 hidden md:flex">
 		{NAVBAR_MENU.map((menu, index) => {
 			const isHaveMore = NAVBAR_MENU.length - 1 > index;
@@ -26,6 +29,7 @@ const Navigation = ({
 								"h-full hover:text-white flex items-center gradient-primary-hover transition-all px-2 rounded-lg",
 								{
 									"text-white": isScrolledDown,
+									"text-white gradient-primary": activeSection === menu.title,
 								},
 							)}
 							size={"subheading2"}>

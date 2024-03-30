@@ -1,6 +1,6 @@
 "use client";
 import { ProjectTypes } from "@/lib/types/project.types";
-import React, { useEffect } from "react";
+import React from "react";
 import Typography from "../atoms/ui/typography";
 import Image from "next/image";
 import clsx from "clsx";
@@ -13,49 +13,51 @@ import {
 	AlertDialogTrigger,
 } from "../atoms/ui/alert-dialog";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import ModalProject from "./ModalProject";
 import { cn } from "@/lib/utils";
 import Reveal from "./Reveal";
+import { Button } from "../atoms/ui/button";
+import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
 type CardProjectProps = {
 	ProjectItem: ProjectTypes;
 	index: number;
 	isBig?: boolean;
-} & React.ComponentPropsWithoutRef<"div">;
-
+	key?: string | number;
+	path: string;
+	className?: string;
+};
 export default function CardProject({
 	ProjectItem,
 	className,
 	isBig,
+	path,
 	index,
 	...otherProps
 }: CardProjectProps) {
-	const params = useSearchParams();
-	const isProjectId = params.get("project-key") == index.toString();
 	const [open, setOpen] = React.useState(false);
-	const isMobile = useMediaQuery({ query: "(min-width: 1280px)" });
-	useEffect(() => {
-		if (isProjectId && !isMobile) {
-			setOpen(true);
-		}
-	}, [isProjectId, isMobile]);
-
+	const isMobile = useMediaQuery({ maxWidth: 768 });
 	// Gunakan objek 'project' sesuai kebutuhan Anda dalam komponen ini
 
 	return (
 		<AlertDialog open={open}>
 			<AlertDialogTrigger asChild>
-				<div
+				<Reveal
 					className={clsx(
-						"w-full sm:w-[46%] lg:w-[30%] relative shadow-xl p-3 rounded-xl",
+						"w-full sm:w-[46%] lg:w-[30%] relative rounded-xl",
 						className,
 					)}
+					wannaOverflow={!isMobile}
+					delay={index * 0.1}
+					animation_gap="full"
+					side={isMobile ? (index % 2 === 0 ? "left" : "right") : "bottom"}
 					{...otherProps}>
-					<div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+					<div className="h-full shadow-xl p-3 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
 						<Link
 							href={{
 								pathname: `/project`,
-								query: { "project-key": index.toString() },
+								query: {
+									"project-key": index.toString(),
+									redirect: path,
+								},
 							}}>
 							<div
 								onClick={() => isMobile && setOpen((prev) => !prev)}
@@ -77,12 +79,15 @@ export default function CardProject({
 								/>
 							</div>
 						</Link>
-						<div className="px-4 py-2 bg-indigo-100 h-full shadow-xl dark:bg-tertiary">
+						<div className="px-4 py-2 bg-indigo-100 h-full dark:bg-tertiary">
 							<Reveal>
 								<Link
 									href={{
 										pathname: `/project`,
-										query: { "project-key": index.toString() },
+										query: {
+											"project-key": index.toString(),
+											redirect: path,
+										},
 									}}>
 									<Typography
 										as="h3"
@@ -98,10 +103,35 @@ export default function CardProject({
 								</p>
 							</Reveal>
 							{/* menu bawah */}
-							<div className="flex items-center flex-wrap"></div>
+							<div className="flex items-center gap-5 flex-wrap">
+								<Button
+									variant={"outline"}
+									className="ring-1 hover:bg-blue-500 hover:text-white hover:ring-0"
+									asChild>
+									<Link
+										href={{
+											pathname: `/project`,
+											query: {
+												"project-key": index.toString(),
+												redirect: path,
+											},
+										}}>
+										More Detail
+									</Link>
+								</Button>
+								{ProjectItem.links?.demo && (
+									<Button className="gap-1 bg-indigo-500 hover:bg-indigo-600	">
+										<Link
+											className="flex gap-1 items-center"
+											href={ProjectItem.links?.demo}>
+											visit <ArrowUpRight size={16} />
+										</Link>
+									</Button>
+								)}
+							</div>
 						</div>
 					</div>
-				</div>
+				</Reveal>
 			</AlertDialogTrigger>
 			<AlertDialogPortal>
 				<AlertDialogOverlay onClick={() => setOpen(false)} />

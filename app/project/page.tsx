@@ -31,7 +31,7 @@ const LinkButton = ({
 	return (
 		<Reveal delay={delay}>
 			<Link
-				className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
+				className="flex gap-2 border blink-button max-sm:w-full bg-slate-100 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
 				href={links}>
 				<Image
 					src={icon}
@@ -48,6 +48,7 @@ const LinkButton = ({
 export default function Page() {
 	const params = useSearchParams();
 	const projectId = Number(params.get("project-key"));
+	const backreference = params.get("redirect") || "";
 	const isProjectId = projectId >= 0 && projectId < PROJECT_SHOWCASE.length;
 	if (params.get("project-key") == undefined) {
 		return <Home />;
@@ -63,11 +64,11 @@ export default function Page() {
 	return (
 		<section
 			id="project-mobile"
-			className="flex flex-col relative pt-14 max-lg:pb-6 p-8 rounded-3xl">
+			className="flex flex-col container pb-20 relative pt-36 max-lg:pb-6 rounded-3xl">
 			<div className="flex flex-col max-lg:pt-14 max-lg:pb-6 py-8 xl:p-8 rounded-3xl">
 				<Link
-					className="absolute top-8 left-8 px-4 py-2 bg-gray-800 text-white rounded-lg"
-					href={"/"}>
+					className="absolute top-28 left-8 px-4 py-2 bg-gray-800 text-white rounded-lg"
+					href={backreference || "/"}>
 					<Typography thick={"bold"}>
 						<span className="transition-all hover:translate-x-1">{`<`}</span>{" "}
 						Back

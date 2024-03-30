@@ -17,13 +17,13 @@ type TypographyComponent = <T extends React.ElementType = "p">(
 const typographyVariant = cva("", {
 	variants: {
 		size: {
-			display: "text-[40px]",
-			headline1: "text-[32px]",
-			headline2: "text-[30px]",
-			subheading1: "text-[24px]",
-			subheading2: "text-[20px]",
-			paragraf1: "text-[18px]",
-			paragraf2: "text-[16px]",
+			display: "text-[40px] sm:text-[48px]",
+			headline1: "text-[32px] sm:text-[40px]",
+			headline2: "text-[30px] sm:text-[36px]",
+			subheading1: "text-[24px] sm:text-[28px]",
+			subheading2: "text-[16px] sm:text-[20px]",
+			paragraf1: "text-[18px] sm:text-[20px]",
+			paragraf2: "text-[16px] sm:text-[18px]",
 			label1: "text-[14px]",
 			label2: "text-[12px]",
 		},
@@ -42,7 +42,7 @@ const typographyVariant = cva("", {
 			inter: "font-inter",
 			montserrat: "font-montserrat",
 			poppins: "font-poppins",
-			code: "font-fira-code",
+			code: "font-code",
 		},
 		defaultVariant: {
 			size: "paragraf2",
