@@ -5,9 +5,7 @@ import man from "@/public/images/decoration/man-in-server.svg";
 import marked from "@/public/images/decoration/marked.svg";
 import shineM from "@/public/images/decoration/shine-m.svg";
 import { motion } from "framer-motion";
-const ABOUT_ME = `Hey there! I'm Fauzan Firdaus, also known as Fauzan, Zan, or Amieow. I'm 17 years old and located in Yogyakarta, Indonesia, I'm a undergraduate student at SMAN 1 Sewon.
-My Hobby is Watching Anime, Gaming and coding. also im doing fishing and gymming to keep fit.
-`;
+import ABOUT_ME from "@/contents/aboutMe";
 //I've been hooked on Computer Science since I was 12, with a particular interest in botting. and when I was 15 i started seriously learning how to code in field of botting. after that when i 16-year-old i started learning web development.
 export default function AboutSection() {
 	return (
@@ -24,7 +22,7 @@ export default function AboutSection() {
 				About me 🧑
 			</Typography>
 			<div className="container relative flex flex-col-reverse gap-4 md:justify-between md:flex-row">
-				<div className="bg-[#e5ebfe] h-fit px-6 rounded-3xl md:w-3/5 py-4 relative">
+				<div className="bg-[#e5ebfe] h-fit px-6 rounded-3xl md:w-3/5 py-8 pb-12 relative">
 					<Typography
 						size={"paragraf1"}
 						className="whitespace-pre-line">

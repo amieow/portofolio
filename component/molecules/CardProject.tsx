@@ -38,11 +38,11 @@ export default function CardProject({
 	// Gunakan objek 'project' sesuai kebutuhan Anda dalam komponen ini
 
 	return (
-		<AlertDialog open={open}>
+		<AlertDialog>
 			<AlertDialogTrigger asChild>
 				<Reveal
 					className={clsx(
-						"w-full sm:w-[46%] lg:w-[30%] relative rounded-xl",
+						"w-full sm:w-[46%] flex lg:w-[30%] items-stretch relative rounded-xl",
 						className,
 					)}
 					wannaOverflow={!isMobile}
@@ -50,7 +50,7 @@ export default function CardProject({
 					animation_gap="full"
 					side={isMobile ? (index % 2 === 0 ? "left" : "right") : "bottom"}
 					{...otherProps}>
-					<div className="h-full shadow-xl p-3 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+					<div className="h-full flex flex-col shadow-xl p-3 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
 						<Link
 							href={{
 								pathname: `/project`,
@@ -79,7 +79,7 @@ export default function CardProject({
 								/>
 							</div>
 						</Link>
-						<div className="px-4 py-2 bg-indigo-100 h-full dark:bg-tertiary">
+						<div className="px-4 flex flex-col py-2 bg-indigo-100 h-full dark:bg-tertiary">
 							<Reveal>
 								<Link
 									href={{
@@ -103,7 +103,7 @@ export default function CardProject({
 								</p>
 							</Reveal>
 							{/* menu bawah */}
-							<div className="flex items-center gap-5 flex-wrap">
+							<div className="flex mt-auto items-center gap-5 flex-wrap">
 								<Button
 									variant={"outline"}
 									className="ring-1 hover:bg-blue-500 hover:text-white hover:ring-0"

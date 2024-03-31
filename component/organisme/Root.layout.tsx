@@ -1,11 +1,14 @@
 "use client";
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import Header from "./header";
 import { Analytics } from "@vercel/analytics/react";
 
 import { Fira_Code, Inter, Poppins, Montserrat } from "next/font/google";
 import Footer from "./footer";
-import Head from "next/head";
+import { AnimatePresence } from "framer-motion";
+import Loading from "../molecules/loading";
+import HandleRouting from "./HandleRouting";
+
 const inter = Inter({
 	subsets: ["latin"],
 	variable: "--font-inter",
@@ -33,30 +36,35 @@ const poppins = Poppins({
 	variable: "--font-poppins",
 	display: "swap",
 });
+
 export const preloading = createContext({
 	preloadingDone: false,
 	setPreloadingDone: (e: boolean) => {},
 });
+
 export default function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
 	const rootRef = useRef(null);
-	const [preloadingDone, setPreloadingDone] = useState(false);
 
 	return (
-		<preloading.Provider value={{ preloadingDone, setPreloadingDone }}>
+		<preloading.Provider
+			value={{ preloadingDone: false, setPreloadingDone: () => {} }}>
 			<body
 				ref={rootRef}
 				className={`bg-background overflow-x-hidden z-10 dark:bg-tertiary text-black dark:text-white relative min-h-screen ${poppins.variable} ${inter.variable} ${montserrat.variable} ${firaCode.variable}`}>
-				<Header rootRef={rootRef} />
-				{children}
+				<HandleRouting>
+					<Header rootRef={rootRef} />
+					{children}
+
+					<Footer />
+				</HandleRouting>
 				<Analytics
 					mode="auto"
 					path={"/"}
 				/>
-				<Footer />
 			</body>
 		</preloading.Provider>
 	);

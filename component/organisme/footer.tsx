@@ -14,7 +14,7 @@ export default function Footer() {
 	const isSmallScreen = useMediaQuery({ maxWidth: 768 });
 	return (
 		<footer className="pt-16 z-10 relative">
-			<footer className="w-full z-10 md:overflow-hidden bg-indigo-100 relative pt-16 pb-40">
+			<footer className="w-full z-10 md:overflow-hidden bg-indigo-100 relative pt-16 pb-16">
 				<div className="container gap-2 flex flex-col max-md:justify-between max-md:px-5 items-center">
 					<Typography
 						font={"poppins"}

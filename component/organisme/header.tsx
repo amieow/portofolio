@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 import Typography from "../atoms/ui/typography";
 import { RefObject, useEffect, useState } from "react";
-import { useScroll } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import Logo from "./logo";
 import Navigation from "./navigation";
 import { NAVBAR_MENU } from "@/contents/Navigation";
@@ -87,7 +87,7 @@ export default function Header({
 	}, [path]);
 	return (
 		<>
-			<header className="absolute top-0 z-20 w-full">
+			<header className="absolute overflow-hidden top-0 z-30 w-full">
 				<header
 					className={cn("flex items-center z-50 h-[80px] transition-all", {
 						// "w-full sticky top-0 bg-[#254142] hidden": isScrolledDown,
@@ -120,6 +120,7 @@ export default function Header({
 					{NAVBAR_MENU.map((menu, index) => (
 						<Link
 							key={index}
+							className="relative"
 							href={menu.link}>
 							<Typography
 								thick={"medium"}
@@ -127,13 +128,19 @@ export default function Header({
 									"h-full flex items-center ease-out px-3 py-1 md:px-6 rounded-2xl",
 									"gradient-primary-hover hover:text-transparent",
 									{
-										"gradient-primary text-white hover:text-white":
+										" text-white hover:text-white":
 											activeSection === menu.title,
 										"hover:bg-clip-text": !(activeSection === menu.title),
 									},
 								)}>
 								{menu.title}
 							</Typography>
+							{activeSection === menu.title && (
+								<motion.span
+									layoutId="pill-tab"
+									transition={{ type: "spring", duration: 0.5 }}
+									className="gradient-primary absolute inset-0 -z-10 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-md"></motion.span>
+							)}
 						</Link>
 					))}
 				</div>

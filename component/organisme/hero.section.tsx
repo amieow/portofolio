@@ -3,7 +3,6 @@ import { Fragment } from "react";
 import Image from "next/image";
 import Reveal from "../molecules/Reveal";
 import waves2 from "@/public/images/decoration/wave (1).svg";
-import { Button } from "../atoms/ui/button";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
@@ -14,6 +13,7 @@ export default function HeroSection() {
 		<section
 			className=" pt-48 hero pb-20 min-h-[77vh] overflow-hidden z-10 sm:min-h-[90vh] relative flex-col gap-20"
 			id="hero">
+			{" "}
 			<div className="flex flex-col overflow-hidden container">
 				<Reveal>
 					<Typography

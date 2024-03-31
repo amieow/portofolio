@@ -22,10 +22,8 @@ export default function Home() {
 		// const delay = preloadState === 2 ? 2000 : 8000;
 
 		// Simulasikan waktu tunggu selama 8 detik sebelum menandai bahwa komponen telah dimuat.
-		// const timer = setTimeout(() => {
-		// 	setIsLoaded(true);
-		// }, delay);
 		setIsLoaded(true);
+
 		// return () => {
 		// 	clearTimeout(timer);
 		// };
@@ -55,8 +53,8 @@ export default function Home() {
 				animate={{ opacity: 1 }} // Animasikan opacity menjadi 1
 				exit={{ opacity: 0 }} // Atur opacity ketika keluar
 			>
-				{isLoaded && (
-					<AnimatePresence>
+				<AnimatePresence>
+					{isLoaded && (
 						<motion.div
 							key="mobile"
 							initial={{ opacity: 0 }}
@@ -71,8 +69,8 @@ export default function Home() {
 								<div className="absolute -bottom-20 w-full bg-indigo-50 h-20"></div>
 							</main>
 						</motion.div>
-					</AnimatePresence>
-				)}
+					)}
+				</AnimatePresence>
 			</motion.div>
 		</div>
 	);
