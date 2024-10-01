@@ -4,12 +4,12 @@ import Link from "next/link";
 import { NAVBAR_MENU } from "@/contents/Navigation";
 import SOCIAL_MEDIA from "@/contents/Social-media";
 import Image from "next/image";
-import mosaic from "@/public/images/decoration/mosaic-1.svg";
 
 import { cn } from "@/lib/utils";
 import SocialMediaButton from "../molecules/SocialMediaButton";
 import { useMediaQuery } from "react-responsive";
-import { TooltipProvider } from "../atoms/ui/tooltip";
+import { LAST_UPDATE } from "@/contents/Constants";
+import { Images_decoration } from "@/contents/images";
 export default function Footer() {
 	const isSmallScreen = useMediaQuery({ maxWidth: 768 });
 	return (
@@ -57,13 +57,13 @@ export default function Footer() {
 					</div>
 					<span className="h-px w-full bg-gray-400 mt-10" />
 					<div className=" flex justify-center gap-5">
-						<Typography size={"label1"}>Last Updated March, 2024</Typography>
+						<Typography size={"label1"}>Last Updated {LAST_UPDATE}</Typography>
 						<span className="h-5 w-1 bg-indigo-300" />
 						<Typography size={"label1"}>All Rights Reserved</Typography>
 					</div>
 				</div>
 				<Image
-					src={mosaic}
+					src={Images_decoration.mosaic}
 					alt=""
 					draggable={false}
 					className={cn(

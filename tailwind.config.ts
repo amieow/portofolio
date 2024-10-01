@@ -42,7 +42,7 @@ module.exports = {
 				wave: "wave 1s ease-in-out infinite",
 			},
 			colors: {
-				primary: "#28D8FF",
+				primary: "#818cf8",
 				secondary: "#ED81FF",
 				tertiary: "#112021",
 				background: "#fafdfc",

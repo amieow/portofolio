@@ -3,13 +3,10 @@ import React from "react";
 import { AlertDialogCancel } from "../atoms/ui/alert-dialog";
 import Link from "next/link";
 import Image from "next/image";
-import webIcon from "@/public/images/icon/website-logo.svg";
-import partnerIcon from "@/public/images/icon/partner-icon.svg";
-import repoIcon from "@/public/images/icon/repository-icon.svg";
-import arrowUpRight from "@/public/images/icon/arrow-up-right.svg";
 import Typography from "../atoms/ui/typography";
 import { formattedDateDDMMYYYY } from "@/lib/utils";
 import { ImageViewer } from "./image-viewer";
+import { Images_decoration } from "@/contents/images";
 export default function ModalProject({
 	ProjectItem,
 	setOpen,
@@ -60,7 +57,7 @@ export default function ModalProject({
 						<Typography>
 							{ProjectItem.category == "WEBSITE" ? (
 								<Image
-									src={webIcon}
+									src={Images_decoration.webIcon}
 									alt="web-icon"
 									width={28}
 									height={28}
@@ -102,7 +99,7 @@ export default function ModalProject({
 									href={ProjectItem.links.demo}>
 									<Typography className="tracking-wide">DEMO</Typography>
 									<Image
-										src={arrowUpRight}
+										src={Images_decoration.arrowUpRight}
 										alt="arrow direct"
 										width={24}
 										height={24}
@@ -114,7 +111,7 @@ export default function ModalProject({
 									className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
 									href={ProjectItem.links.repository}>
 									<Image
-										src={repoIcon}
+										src={Images_decoration.repoIcon}
 										alt="repo icon"
 										width={24}
 										height={24}
@@ -128,7 +125,7 @@ export default function ModalProject({
 									className="flex gap-2 border max-sm:w-full bg-slate-50 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
 									href={ProjectItem.links.collaborators}>
 									<Image
-										src={partnerIcon}
+										src={Images_decoration.partnerIcon}
 										alt="partner icon"
 										width={24}
 										height={24}

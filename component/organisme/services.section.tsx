@@ -16,7 +16,7 @@ export default function ServicesSection() {
 
 	return (
 		<section
-			className="w-full flex flex-col gap-3 pt-20 bg-indigo-50 pb-20"
+			className="w-full flex flex-col gap-3 pt-20 bg-indigo-50 pb-36"
 			id="services">
 			<Typography
 				as="h2"

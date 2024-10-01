@@ -6,14 +6,11 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
-import webIcon from "@/public/images/icon/website-logo.svg";
-import partnerIcon from "@/public/images/icon/partner-icon.svg";
-import repoIcon from "@/public/images/icon/repository-icon.svg";
-import arrowUpRight from "@/public/images/icon/arrow-up-right.svg";
-import packages from "@/public/images/icon/package-icon.svg";
 import Home from "./home";
 import Reveal from "@/component/molecules/Reveal";
 import ImageSwipper from "./imageSwipper";
+import TransitionLink from "@/component/molecules/TransitisionLink";
+import { Images_decoration } from "@/contents/images";
 
 const LinkButton = ({
 	children,
@@ -30,7 +27,7 @@ const LinkButton = ({
 }) => {
 	return (
 		<Reveal delay={delay}>
-			<Link
+			<TransitionLink
 				className="flex gap-2 border blink-button max-sm:w-full bg-slate-100 border-gray-400 px-6 py-3 hover:bg-slate-200 rounded-lg"
 				href={links}>
 				<Image
@@ -40,7 +37,7 @@ const LinkButton = ({
 					height={24}
 				/>
 				<Typography className="tracking-wide">{children}</Typography>
-			</Link>
+			</TransitionLink>
 		</Reveal>
 	);
 };
@@ -64,16 +61,18 @@ export default function Page() {
 	return (
 		<section
 			id="project-mobile"
-			className="flex flex-col container pb-20 relative pt-36 max-lg:pb-6 rounded-3xl">
+			className="flex flex-col container min-h-[90vh] pb-20 relative pt-36 max-lg:pb-6 rounded-3xl">
 			<div className="flex flex-col max-lg:pt-14 max-lg:pb-6 py-8 xl:p-8 rounded-3xl">
-				<Link
-					className="absolute top-28 left-8 px-4 py-2 bg-gray-800 text-white rounded-lg"
-					href={backreference || "/"}>
-					<Typography thick={"bold"}>
-						<span className="transition-all hover:translate-x-1">{`<`}</span>{" "}
-						Back
-					</Typography>
-				</Link>
+				<div className="top-28 absolute left-8">
+					<TransitionLink
+						className="flex bg-gray-800 px-4 py-2 text-white rounded-lg"
+						href={backreference || "/"}>
+						<Typography thick={"bold"}>
+							<span className="transition-all hover:translate-x-1">{`<`}</span>{" "}
+							Back
+						</Typography>
+					</TransitionLink>
+				</div>
 				<div className="max-lg:bg-opacity-90 gap-4 lg:gap-8 flex flex-col lg:flex-row w-full">
 					<ImageSwipper ProjectItem={ProjectItem} />
 					<div className="flex flex-col w-full">
@@ -105,7 +104,7 @@ export default function Page() {
 								<Typography>
 									{ProjectItem.category == "WEBSITE" ? (
 										<Image
-											src={webIcon}
+											src={Images_decoration.webIcon}
 											alt="web-icon"
 											width={28}
 											height={28}
@@ -161,7 +160,7 @@ export default function Page() {
 								<LinkButton
 									links={ProjectItem.links.demo}
 									alt="demo icon"
-									icon={arrowUpRight}
+									icon={Images_decoration.arrowUpRight}
 									delay={0.2}>
 									DEMO
 								</LinkButton>
@@ -171,7 +170,7 @@ export default function Page() {
 								<LinkButton
 									links={ProjectItem.links.repository}
 									alt="repo icon"
-									icon={repoIcon}
+									icon={Images_decoration.repoIcon}
 									delay={0.4}>
 									REPO
 								</LinkButton>
@@ -181,7 +180,7 @@ export default function Page() {
 								<LinkButton
 									links={ProjectItem.links.collaborators}
 									alt="partner icon"
-									icon={partnerIcon}
+									icon={Images_decoration.partnerIcon}
 									delay={0.6}>
 									COLLABORATORS
 								</LinkButton>
@@ -205,13 +204,13 @@ export default function Page() {
 				) : (
 					<div></div>
 				)}
-				<Link
+				<TransitionLink
 					className="px-6 py-3 flex gap-2 bg-gray-200 hover:bg-gray-400 transition-all rounded-lg"
 					href={{
 						pathname: "/project",
 					}}>
 					<Image
-						src={packages}
+						src={Images_decoration.packages}
 						alt="package icon"
 						width={24}
 						height={24}
@@ -222,7 +221,7 @@ export default function Page() {
 						{" "}
 						All Project
 					</Typography>
-				</Link>
+				</TransitionLink>
 				{projectId + 1 < PROJECT_SHOWCASE.length ? (
 					<Link
 						className="px-4 py-2 gap-2 bg-gray-200 hover:bg-gray-400 transition-all flex rounded-lg items-center"

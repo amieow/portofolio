@@ -3,6 +3,7 @@ import Typography from "../atoms/ui/typography";
 import { Fragment } from "react";
 import { TypeNavbarMenu } from "@/contents/Navigation";
 import { cn } from "@/lib/utils";
+import TransitionLink from "../molecules/TransitisionLink";
 
 type NavigationProps = {
 	NAVBAR_MENU: TypeNavbarMenu[];
@@ -21,7 +22,9 @@ const Navigation = ({
 			const isHaveMore = NAVBAR_MENU.length - 1 > index;
 			return (
 				<Fragment key={index}>
-					<Link href={menu.link}>
+					<Link
+						href={menu.link}
+						scroll>
 						<Typography
 							thick={"bold"}
 							color={path === menu.link ? "primary" : "default"}

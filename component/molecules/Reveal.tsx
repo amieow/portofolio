@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 type RevealProps = {
@@ -77,14 +78,23 @@ export default function Reveal({
 	return (
 		<div
 			ref={ref}
-			style={{
-				position: "relative",
-				overflow: wannaOverflow ? "visible" : "hidden",
-			}}
-			className={className}>
+			// style={{
+			// 	position: "relative",
+			// 	overflow: wannaOverflow ? "visible" : "hidden",
+			// }}
+			className={cn(
+				"relative overflow-hidden",
+				{
+					"overflow-visible": wannaOverflow,
+				},
+				className,
+			)}>
 			<motion.div
 				variants={variant}
 				initial="hidden"
+				style={{
+					width,
+				}}
 				animate={mainControl}>
 				{children}
 			</motion.div>

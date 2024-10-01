@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Typography from "../atoms/ui/typography";
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useContext, useEffect, useMemo, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import Logo from "./logo";
 import Navigation from "./navigation";
@@ -9,18 +9,21 @@ import { NAVBAR_MENU } from "@/contents/Navigation";
 import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 import { cn, parseTarget } from "@/lib/utils";
+import TransitionLink from "../molecules/TransitisionLink";
+import { ctxProvider } from "@/app/template";
 export default function Header({
 	rootRef,
 }: {
 	rootRef: RefObject<HTMLBodyElement>;
 }) {
+	const fullUrl = useContext(ctxProvider).fullUrl;
 	const path = usePathname();
 	const isVerySmallScreen = useMediaQuery({ maxWidth: 390 });
 	const [isScrolledDown, setScrolledDown] = useState(false);
 	const { scrollYProgress } = useScroll();
 	scrollYProgress.on("change", (progress) => {
 		const ProgressToPercent = progress * 100;
-		handleScroll();
+		determineActiveSection();
 		if (ProgressToPercent > 20 && !isScrolledDown) {
 			setScrolledDown(true);
 		} else if (ProgressToPercent < 20 && isScrolledDown) {
@@ -34,38 +37,10 @@ export default function Header({
 	const excludePageOnly = NAVBAR_MENU.filter(
 		(menu) => parseTarget(menu.link).sectionTarget,
 	);
-	const determineActiveSection = () => {
-		let isAdayangTrue = false;
-		for (const sectionID of excludePageOnly) {
-			const Target = parseTarget(sectionID.link);
-			const isInThePage = path === Target.pageTarget;
-			if (!Target.sectionTarget.length && isInThePage && isScrolledDown) {
-				setActiveSection(sectionID.title);
-				isAdayangTrue = true;
-				break;
-			}
-			const section = document.getElementById(Target.sectionTarget);
-			if (section) {
-				const rect = section.getBoundingClientRect();
-				// console.log({
-				// 	top: rect.top,
-				// 	bottom: rect.bottom,
-				// 	id: sectionID.link.slice(1),
-				// });
-				if (
-					rect.top < 382 &&
-					rect.bottom >= 300 &&
-					isInThePage &&
-					isScrolledDown
-				) {
-					setActiveSection(sectionID.title);
-					isAdayangTrue = true;
-					break;
-				}
-			}
-		}
-		if (!isAdayangTrue) {
-			for (const sectionID of filterPageOnly) {
+	const determineActiveSection = useMemo(() => {
+		return () => {
+			let isAdayangTrue = false;
+			for (const sectionID of excludePageOnly) {
 				const Target = parseTarget(sectionID.link);
 				const isInThePage = path === Target.pageTarget;
 				if (!Target.sectionTarget.length && isInThePage && isScrolledDown) {
@@ -73,18 +48,45 @@ export default function Header({
 					isAdayangTrue = true;
 					break;
 				}
+				const section = document.getElementById(Target.sectionTarget);
+				if (section) {
+					const rect = section.getBoundingClientRect();
+					// console.log({
+					// 	top: rect.top,
+					// 	bottom: rect.bottom,
+					// 	id: sectionID.link.slice(1),
+					// });
+					if (
+						rect.top < 382 &&
+						rect.bottom >= 300 &&
+						isInThePage &&
+						isScrolledDown
+					) {
+						setActiveSection(sectionID.title);
+						isAdayangTrue = true;
+						break;
+					}
+				}
 			}
 			if (!isAdayangTrue) {
-				setActiveSection("");
+				for (const sectionID of filterPageOnly) {
+					const Target = parseTarget(sectionID.link);
+					const isInThePage = path === Target.pageTarget;
+					if (!Target.sectionTarget.length && isInThePage && isScrolledDown) {
+						setActiveSection(sectionID.title);
+						isAdayangTrue = true;
+						break;
+					}
+				}
+				if (!isAdayangTrue) {
+					setActiveSection("");
+				}
 			}
-		}
-	};
-	const handleScroll = () => {
-		determineActiveSection();
-	};
+		};
+	}, [path, excludePageOnly, filterPageOnly, isScrolledDown]);
 	useEffect(() => {
-		handleScroll(); // Initial call when component mounts
-	}, [path]);
+		determineActiveSection(); // Initial call when component mounts
+	}, [fullUrl, determineActiveSection]);
 	return (
 		<>
 			<header className="absolute overflow-hidden top-0 z-30 w-full">
@@ -118,7 +120,8 @@ export default function Header({
 						"first:rounded-l-3xl last:rounded-r-3xl",
 					)}>
 					{NAVBAR_MENU.map((menu, index) => (
-						<Link
+						<TransitionLink
+							noLoader
 							key={index}
 							className="relative"
 							href={menu.link}>
@@ -141,7 +144,7 @@ export default function Header({
 									transition={{ type: "spring", duration: 0.5 }}
 									className="gradient-primary absolute inset-0 -z-10 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-md"></motion.span>
 							)}
-						</Link>
+						</TransitionLink>
 					))}
 				</div>
 			</div>

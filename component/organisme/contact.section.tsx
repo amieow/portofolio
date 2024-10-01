@@ -1,3 +1,4 @@
+"use client";
 import Typography from "../atoms/ui/typography";
 import SOCIAL_MEDIA from "@/contents/Social-media";
 import SocialMediaButton from "../molecules/SocialMediaButton";
@@ -7,10 +8,10 @@ import { Textarea } from "../atoms/ui/textarea";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../atoms/ui/button";
-import gmail from "@/public/images/icon/gmail-icon.svg";
 import Reveal from "../molecules/Reveal";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Images from "@/contents/images";
 
 export default function ContactSection() {
 	const router = useRouter();
@@ -72,7 +73,7 @@ export default function ContactSection() {
 							reverse
 							iconOnly
 							username="amieowkenzy@gmail.com"
-							icon={gmail}
+							icon={Images.gmail}
 							link="mailto:umaybeucanrun0butneverlol@gmail.com"
 							color="#ca8a04"
 						/>

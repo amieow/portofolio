@@ -1,11 +1,9 @@
 import React from "react";
 import Typography from "../atoms/ui/typography";
-import Image from "next/image";
-import man from "@/public/images/decoration/man-in-server.svg";
-import marked from "@/public/images/decoration/marked.svg";
-import shineM from "@/public/images/decoration/shine-m.svg";
 import { motion } from "framer-motion";
 import ABOUT_ME from "@/contents/aboutMe";
+import { Images_decoration } from "@/contents/images";
+import Image from "next/image";
 //I've been hooked on Computer Science since I was 12, with a particular interest in botting. and when I was 15 i started seriously learning how to code in field of botting. after that when i 16-year-old i started learning web development.
 export default function AboutSection() {
 	return (
@@ -40,7 +38,7 @@ export default function AboutSection() {
 								},
 							}}>
 							<Image
-								src={marked}
+								src={Images_decoration.marked}
 								alt=""
 								className="rotate-12"
 								width={36}
@@ -51,13 +49,13 @@ export default function AboutSection() {
 				</div>
 				<div>
 					<Image
-						src={man}
+						src={Images_decoration.man}
 						alt="amieow"
 						className="w-full z-10 "
 					/>
 				</div>
 				<Image
-					src={shineM}
+					src={Images_decoration.shineM}
 					alt=""
 					className="absolute top-0 right-0 hover:rotate-[720deg] hover:scale-125 cursor-pointer duration-700 transition-all translate-x-1/2 -translate-y-1/2"
 				/>

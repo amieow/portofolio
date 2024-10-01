@@ -12,10 +12,10 @@ const NAVBAR_MENU: TypeNavbarMenu[] = [
 		title: "Services",
 		link: "/#services",
 	},
-	{
-		title: "Contact",
-		link: "/#contact",
-	},
+	// {
+	// 	title: "Contact",
+	// 	link: "/#contact",
+	// },
 ];
 
 type TypeNavbarMenu = {

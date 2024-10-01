@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import Reveal from "./Reveal";
 import { Button } from "../atoms/ui/button";
 import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
+import TransitionLink from "./TransitisionLink";
 type CardProjectProps = {
 	ProjectItem: ProjectTypes;
 	index: number;
@@ -45,13 +46,14 @@ export default function CardProject({
 						"w-full sm:w-[46%] flex lg:w-[30%] items-stretch relative rounded-xl",
 						className,
 					)}
+					width="100%"
 					wannaOverflow={!isMobile}
 					delay={index * 0.1}
 					animation_gap="full"
 					side={isMobile ? (index % 2 === 0 ? "left" : "right") : "bottom"}
 					{...otherProps}>
 					<div className="h-full flex flex-col shadow-xl p-3 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-						<Link
+						<TransitionLink
 							href={{
 								pathname: `/project`,
 								query: {
@@ -78,7 +80,7 @@ export default function CardProject({
 									style={{ transformOrigin: "center" }}
 								/>
 							</div>
-						</Link>
+						</TransitionLink>
 						<div className="px-4 flex flex-col py-2 bg-indigo-100 h-full dark:bg-tertiary">
 							<Reveal>
 								<Link
@@ -108,7 +110,7 @@ export default function CardProject({
 									variant={"outline"}
 									className="ring-1 hover:bg-blue-500 hover:text-white hover:ring-0"
 									asChild>
-									<Link
+									<TransitionLink
 										href={{
 											pathname: `/project`,
 											query: {
@@ -117,7 +119,7 @@ export default function CardProject({
 											},
 										}}>
 										More Detail
-									</Link>
+									</TransitionLink>
 								</Button>
 								{ProjectItem.links?.demo && (
 									<Button className="gap-1 bg-indigo-500 hover:bg-indigo-600	">

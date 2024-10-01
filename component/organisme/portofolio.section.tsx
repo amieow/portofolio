@@ -5,11 +5,12 @@ import PROJECT_SHOWCASE from "@/contents/Projects";
 import CardProject from "../molecules/CardProject";
 import Reveal from "../molecules/Reveal";
 import Image from "next/image";
-import wave_nonsimetric from "@/public/images/decoration/wave-nonsimetric.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../atoms/ui/button";
 import { ArrowUpRight } from "lucide-react";
+import TransitionLink from "../molecules/TransitisionLink";
+import { Images_decoration } from "@/contents/images";
 
 export default function PortofolioSection() {
 	const path = usePathname();
@@ -75,14 +76,14 @@ export default function PortofolioSection() {
 								className="border-2 border-gray-300"
 								variant={"outline"}
 								asChild>
-								<Link href={"/project"}>
+								<TransitionLink href={"/project"}>
 									<Typography
 										font={"poppins"}
 										className="gap-2 flex">
 										Find more projects
 									</Typography>
 									<ArrowUpRight className=" ml-2 w-6 h-6" />
-								</Link>
+								</TransitionLink>
 							</Button>
 						</Reveal>
 					</div>
@@ -91,14 +92,14 @@ export default function PortofolioSection() {
 					draggable={false}
 					className="w-full absolute -right-[80%] top-[60%] rotate-[35deg] -z-10">
 					<Image
-						src={wave_nonsimetric}
+						src={Images_decoration.wave_nonsimetric}
 						alt=""
 						width={400}
 						height={400}
 						draggable={false}
 					/>
 					<Image
-						src={wave_nonsimetric}
+						src={Images_decoration.wave_nonsimetric}
 						alt=""
 						className="-translate-y-0.5 -translate-x-3"
 						width={400}
@@ -110,14 +111,14 @@ export default function PortofolioSection() {
 					draggable={false}
 					className="w-full absolute -top-0 xl:-top-[70%] -left-[20%] -rotate-[35deg] -z-10">
 					<Image
-						src={wave_nonsimetric}
+						src={Images_decoration.wave_nonsimetric}
 						alt=""
 						draggable={false}
 						width={400}
 						height={400}
 					/>
 					<Image
-						src={wave_nonsimetric}
+						src={Images_decoration.wave_nonsimetric}
 						alt=""
 						className="-translate-y-0.5 -translate-x-3"
 						width={400}

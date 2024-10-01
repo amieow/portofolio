@@ -1,17 +1,5 @@
 import { ProjectTypes } from "@/lib/types/project.types";
-import schoolabs from "@/public/images/project-showcase/schoolabs.png";
-
-import depublic from "@/public/images/project-showcase/depublic.png";
-import depublic1 from "@/public/images/project-showcase/depublic/1.png";
-import depublic2 from "@/public/images/project-showcase/depublic/2.png";
-import depublic3 from "@/public/images/project-showcase/depublic/3.png";
-
-import futurespace from "@/public/images/project-showcase/futurespace.png";
-import futurespace1 from "@/public/images/project-showcase/futurespace/1.png";
-import futurespace2 from "@/public/images/project-showcase/futurespace/2.png";
-import futurespace3 from "@/public/images/project-showcase/futurespace/3.png";
-import futurespace4 from "@/public/images/project-showcase/futurespace/4.png";
-import futurespace5 from "@/public/images/project-showcase/futurespace/5.png";
+import Images from "./images";
 
 const PROJECT_SHOWCASE: ProjectTypes[] = [
 	{
@@ -20,7 +8,7 @@ const PROJECT_SHOWCASE: ProjectTypes[] = [
 			"SchooLabs is a new start up company and they want to build a website that offers a range of online courses for UI/UX Designers and Developers. The website aims to offer a user-friendly interface and visually appealing platform, the platform must be easy for learners to discover, access and engage with online courses.",
 		shortDescription:
 			"A user-friendly platform offering a range of online courses for UI/UX Designers and Developers.",
-		thumbnail: schoolabs,
+		thumbnail: Images.schoolabs,
 		dateStart: new Date("2023-08-26"),
 		dateEnd: new Date("2023-10-12"),
 		isColaborating: true,
@@ -40,8 +28,8 @@ const PROJECT_SHOWCASE: ProjectTypes[] = [
 			"This platform is a marketplace for buying and selling concert or event tickets. It offers various categories of needs. Users who register on this application can act as buyers. In this case, users are expected to easily find concert schedules that suit their needs and pay for tickets online. Additionally, the website is expected to provide accurate and up-to-date information about ongoing events.",
 		shortDescription:
 			"Depublic serves as a marketplace for purchasing and selling concert or event tickets",
-		thumbnail: depublic,
-		imageDetail: [depublic1, depublic2, depublic3],
+		thumbnail: Images.depublic,
+		imageDetail: [Images.depublic1, Images.depublic2, Images.depublic3],
 		style: { img: "contain", backgroundColor: "#272727" },
 		techStack: ["Next.js", "Tailwind", "React", "jwt"],
 		myRole: "Frontend Developer",
@@ -59,13 +47,13 @@ Gone are the days of being tied down to a static office lease. With Futurespace,
 
 `,
 		shortDescription: "Slicing figma designs into reusable components.",
-		thumbnail: futurespace,
+		thumbnail: Images.futurespace,
 		imageDetail: [
-			futurespace1,
-			futurespace2,
-			futurespace3,
-			futurespace4,
-			futurespace5,
+			Images.futurespace1,
+			Images.futurespace2,
+			Images.futurespace3,
+			Images.futurespace4,
+			Images.futurespace5,
 		],
 		isColaborating: true,
 		techStack: ["Next.js", "Tailwind", "React"],
@@ -84,7 +72,7 @@ Gone are the days of being tied down to a static office lease. With Futurespace,
 			"SchooLabs is a new start up company and they want to build a website that offers a range of online courses for UI/UX Designers and Developers. The website aims to offer a user-friendly interface and visually appealing platform, the platform must be easy for learners to discover, access and engage with online courses.",
 		shortDescription:
 			"A user-friendly platform offering a range of online courses for UI/UX Designers and Developers.",
-		thumbnail: schoolabs,
+		thumbnail: Images.schoolabs,
 		dateStart: new Date("2023-08-26"),
 		dateEnd: new Date("2023-10-12"),
 		isColaborating: true,
@@ -104,8 +92,8 @@ Gone are the days of being tied down to a static office lease. With Futurespace,
 			"This platform is a marketplace for buying and selling concert or event tickets. It offers various categories of needs. Users who register on this application can act as buyers. In this case, users are expected to easily find concert schedules that suit their needs and pay for tickets online. Additionally, the website is expected to provide accurate and up-to-date information about ongoing events.",
 		shortDescription:
 			"Depublic serves as a marketplace for purchasing and selling concert or event tickets",
-		thumbnail: depublic,
-		imageDetail: [depublic1, depublic2, depublic3],
+		thumbnail: Images.depublic,
+		imageDetail: [Images.depublic1, Images.depublic2, Images.depublic3],
 		style: { img: "contain", backgroundColor: "#272727" },
 		techStack: ["Next.js", "Tailwind", "React", "jwt"],
 		myRole: "Frontend Developer",
@@ -123,13 +111,13 @@ Gone are the days of being tied down to a static office lease. With Futurespace,
 
 `,
 		shortDescription: "Slicing figma designs into reusable components.",
-		thumbnail: futurespace,
+		thumbnail: Images.futurespace,
 		imageDetail: [
-			futurespace1,
-			futurespace2,
-			futurespace3,
-			futurespace4,
-			futurespace5,
+			Images.futurespace1,
+			Images.futurespace2,
+			Images.futurespace3,
+			Images.futurespace4,
+			Images.futurespace5,
 		],
 		isColaborating: true,
 		techStack: ["Next.js", "Tailwind", "React"],
