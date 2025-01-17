@@ -60,15 +60,17 @@ export default function PortofolioSection() {
 						Here are some projects {`I've`} worked on <br /> some are
 						colaborating with others
 					</Typography>
-					<div className="w-full z-10 flex items-stretch flex-wrap md:gap-10 mt-10">
-						{PROJECT_SHOWCASE.slice(0, 3).map((ITEM, INDEX) => (
-							<CardProject
-								path={path}
-								index={INDEX}
-								key={INDEX}
-								ProjectItem={ITEM}
-							/>
-						))}
+					<div className="w-full z-10 flex flex-col gap-10 pt-10 h-full">
+						<div className="flex flex-wrap md:items-stretch h-fit gap-8 flex-col sm:flex-row">
+							{PROJECT_SHOWCASE.slice(0, 3).map((ITEM, INDEX) => (
+								<CardProject
+									path={path}
+									index={INDEX}
+									key={INDEX}
+									ProjectItem={ITEM}
+								/>
+							))}
+						</div>
 						<Reveal
 							side="left"
 							className="flex w-full items-center justify-center">
@@ -76,14 +78,14 @@ export default function PortofolioSection() {
 								className="border-2 border-gray-300"
 								variant={"outline"}
 								asChild>
-								<TransitionLink href={"/project"}>
+								<Link href={"https://github.com/amieow?tab=repositories"}>
 									<Typography
 										font={"poppins"}
 										className="gap-2 flex">
 										Find more projects
 									</Typography>
 									<ArrowUpRight className=" ml-2 w-6 h-6" />
-								</TransitionLink>
+								</Link>
 							</Button>
 						</Reveal>
 					</div>

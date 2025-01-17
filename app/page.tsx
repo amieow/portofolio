@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import ServicesSection from "@/component/organisme/services.section";
 import AboutSection from "@/component/organisme/about.section";
 import ContactSection from "@/component/organisme/contact.section";
+import SertificateSection from "@/component/organisme/sertificate.section";
 
 export default function Home() {
 	return (
@@ -17,8 +18,10 @@ export default function Home() {
 			<main className="flex flex-col relative">
 				<HeroSection />
 				<AboutSection />
+				<SertificateSection />
 				<PortofolioSection />
 				<ServicesSection />
+				<div className="w-full h-20 bg-indigo-50"></div>
 				<div className="absolute -bottom-20 w-full bg-indigo-50 h-20"></div>
 			</main>
 		</motion.div>

@@ -1,2 +1,2 @@
 // Month, Year
-export const LAST_UPDATE = "June, 2024";
+export const LAST_UPDATE = "January, 2025";
