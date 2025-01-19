@@ -1,8 +1,11 @@
 const NAVBAR_MENU: TypeNavbarMenu[] = [
 	{
 		title: "Home",
-		link: "/",
-		section: "",
+		link: "/",	
+	},
+	{
+		title: "About me",
+		link:"/about",
 	},
 	{
 		title: "Project",
