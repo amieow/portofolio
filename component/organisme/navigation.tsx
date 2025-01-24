@@ -78,7 +78,7 @@ const Navigation = ({
 									{menu.subMenu.map((v) => {
 										if (v.link) {
 											return (
-												<Link className="px-2 py-1 hover:bg-indigo-800 flex-1 text-white" href={v.link}>
+												<Link target="_blank" className="px-2 py-1 hover:bg-indigo-800 flex-1 text-white" href={v.link}>
 													<Typography thick={"medium"}>
 														{v.title}
 													</Typography>

@@ -78,7 +78,7 @@ export default function PortofolioSection() {
 								className="border-2 border-gray-300"
 								variant={"outline"}
 								asChild>
-								<Link href={"https://github.com/amieow?tab=repositories"}>
+								<Link target="_blank" href={"https://github.com/amieow?tab=repositories"}>
 									<Typography
 										font={"poppins"}
 										className="gap-2 flex">
