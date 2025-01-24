@@ -57,16 +57,6 @@ export default function HeroSection() {
 						</Reveal>
 					))}
 				</div>
-				<Reveal>
-					<Link href={"/pdf/my-resume.pdf"} download>
-						<Button asChild className="w-fit bg-green-500 flex gap-2 hover:bg-green-700 hover:cursor-pointer">
-							<Typography>
-								<Newspaper width={16} />
-								Resume
-							</Typography>
-						</Button>
-					</Link>
-				</Reveal>
 			</div>
 			<motion.div
 				initial={{ y: 0, x: "50%" }}

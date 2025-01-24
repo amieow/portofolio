@@ -6,12 +6,10 @@ import { motion, useScroll } from "framer-motion";
 import Logo from "./logo";
 import Navigation from "./navigation";
 import { NAVBAR_MENU } from "@/contents/Navigation";
-import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 import { cn, parseTarget } from "@/lib/utils";
 import TransitionLink from "../molecules/TransitisionLink";
 import { ctxProvider } from "@/app/template";
-import { MobileMenuHeader } from "./mobileMenu";
 export default function Header({
 	rootRef,
 }: {
@@ -33,16 +31,16 @@ export default function Header({
 	});
 	const [activeSection, setActiveSection] = useState("");
 	const filterPageOnly = NAVBAR_MENU.filter(
-		(menu) => !parseTarget(menu.link).sectionTarget,
+		(menu) => !parseTarget(menu.link || "").sectionTarget,
 	);
 	const excludePageOnly = NAVBAR_MENU.filter(
-		(menu) => parseTarget(menu.link).sectionTarget,
+		(menu) => parseTarget(menu.link || "").sectionTarget,
 	);
 	const determineActiveSection = useMemo(() => {
 		return () => {
 			let isAdayangTrue = false;
 			for (const sectionID of excludePageOnly) {
-				const Target = parseTarget(sectionID.link);
+				const Target = parseTarget(sectionID.link || "");
 				const isInThePage = path === Target.pageTarget;
 				if (!Target.sectionTarget.length && isInThePage && isScrolledDown) {
 					setActiveSection(sectionID.title);
@@ -71,7 +69,7 @@ export default function Header({
 			}
 			if (!isAdayangTrue) {
 				for (const sectionID of filterPageOnly) {
-					const Target = parseTarget(sectionID.link);
+					const Target = parseTarget(sectionID.link || "");
 					const isInThePage = path === Target.pageTarget;
 					if (!Target.sectionTarget.length && isInThePage && isScrolledDown) {
 						setActiveSection(sectionID.title);
@@ -90,7 +88,7 @@ export default function Header({
 	}, [fullUrl, determineActiveSection]);
 	return (
 		<>
-			<header className="absolute overflow-hidden top-0 z-30 w-full">
+			<header className="absolute top-0 z-30 w-full">
 				<header
 					className={cn("flex items-center z-50 h-[80px] transition-all", {
 						// "w-full sticky top-0 bg-[#254142] hidden": isScrolledDown,
@@ -118,35 +116,37 @@ export default function Header({
 				<div
 					className={cn(
 						"flex bg-white/30 relative backdrop-blur-md border border-gray-300 p-1 rounded-3xl",
-						"first:rounded-l-3xl last:rounded-r-3xl",
+						"first:rounded-l-xl last:rounded-r-xl",
 					)}>
-					{NAVBAR_MENU.map((menu, index) => (
-						<TransitionLink
-							noLoader
-							key={index}
-							className="relative"
-							href={menu.link}>
-							<Typography
-								thick={"medium"}
-								className={cn(
-									"h-full flex items-center ease-out px-3 py-1 md:px-6 rounded-2xl",
-									"gradient-primary-hover hover:text-transparent",
-									{
-										" text-white hover:text-white":
-											activeSection === menu.title,
-										"hover:bg-clip-text": !(activeSection === menu.title),
-									},
-								)}>
-								{menu.title}
-							</Typography>
-							{activeSection === menu.title && (
-								<motion.span
-									layoutId="pill-tab"
-									transition={{ type: "spring", duration: 0.5 }}
-									className="gradient-primary absolute inset-0 -z-10 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-md"></motion.span>
-							)}
-						</TransitionLink>
-					))}
+					{NAVBAR_MENU.map((menu, index) => {
+						if (menu.link) {
+							return (<TransitionLink
+								noLoader
+								key={index}
+								className="relative"
+								href={menu.link}>
+								<Typography
+									thick={"medium"}
+									className={cn(
+										"h-full flex items-center ease-out px-3 py-1 md:px-6 rounded-2xl",
+										"gradient-primary-hover hover:text-transparent",
+										{
+											" text-white hover:text-white":
+												activeSection === menu.title,
+											"hover:bg-clip-text": !(activeSection === menu.title),
+										},
+									)}>
+									{menu.title}
+								</Typography>
+								{activeSection === menu.title && (
+									<motion.span
+										layoutId="pill-tab"
+										transition={{ type: "spring", duration: 0.5 }}
+										className="gradient-primary absolute inset-0 -z-10 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-md"></motion.span>
+								)}
+							</TransitionLink>)
+						}
+					})}
 				</div>
 			</div>
 		</>

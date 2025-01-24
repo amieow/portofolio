@@ -24,17 +24,28 @@ export default function Footer() {
 						Amieow
 					</Typography>
 					<div className="flex">
-						{NAVBAR_MENU.map((menu, index) => (
-							<Link
-								href={menu.link}
-								key={index}>
+						{NAVBAR_MENU.map((menu, index) => {
+							if (menu.link) {
+								return (
+									<Link
+										href={menu.link}
+										key={index}>
+										<Typography
+											className="py-2 px-4 hover:underline"
+											thick={"medium"}>
+											{menu.title}
+										</Typography>
+									</Link>
+								)
+							}
+							return (
 								<Typography
 									className="py-2 px-4 hover:underline"
 									thick={"medium"}>
 									{menu.title}
 								</Typography>
-							</Link>
-						))}
+							)
+						})}
 					</div>
 					<div className="flex flex-col"></div>
 					<div className="flex flex-col md:ml-10">

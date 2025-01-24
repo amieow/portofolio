@@ -1,11 +1,7 @@
 const NAVBAR_MENU: TypeNavbarMenu[] = [
 	{
 		title: "Home",
-		link: "/",	
-	},
-	{
-		title: "About me",
-		link:"/about",
+		link: "/",
 	},
 	{
 		title: "Project",
@@ -15,6 +11,24 @@ const NAVBAR_MENU: TypeNavbarMenu[] = [
 		title: "Services",
 		link: "/#services",
 	},
+	{
+		title:"Download",
+		subMenu: [
+			{
+				title : "Resume",
+				link:"/pdf/my-resume.pdf"
+			},
+			{
+				title: "Books CP Tutorial(IDN)",
+				link:"https://osn.toki.id/data/pemrograman-kompetitif-dasar.pdf"
+			},
+			{
+				title: "Books CP Tutorial(ENG)",
+				link:"https://files.gitter.im/SamZhangQingChuan/sam/DA1g/Steven-Halim_-Felix-Halim-Competitive-Programming-3_-The-New-Lower-Bound-of-Programming-Contests-Lulu.com-_2013_.pdf"
+			},
+			
+		]
+	}
 	// {
 	// 	title: "Contact",
 	// 	link: "/#contact",
@@ -23,7 +37,8 @@ const NAVBAR_MENU: TypeNavbarMenu[] = [
 
 type TypeNavbarMenu = {
 	title: string;
-	link: string;
+	link?: string;
+	subMenu?:TypeNavbarMenu[]
 	section?: string;
 };
 
