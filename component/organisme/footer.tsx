@@ -38,13 +38,6 @@ export default function Footer() {
 									</Link>
 								)
 							}
-							return (
-								<Typography
-									className="py-2 px-4 hover:underline"
-									thick={"medium"}>
-									{menu.title}
-								</Typography>
-							)
 						})}
 					</div>
 					<div className="flex flex-col"></div>

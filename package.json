@@ -34,6 +34,7 @@
     "radix-ui": "^1.1.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-medium-image-zoom": "^5.2.13",
     "react-responsive": "^9.0.2",
     "react-viewer": "^3.2.2",
     "swiper": "^11.0.7",

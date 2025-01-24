@@ -1,18 +1,12 @@
 import React from "react";
 import Typography from "../atoms/ui/typography";
 import Image from "next/image";
-import Images from "@/contents/images";
 import Link from "next/link";
+import allMySertif from "@/contents/Sertificate";
+import { cn } from "@/lib/utils";
+import Zoom from 'react-medium-image-zoom'
 //I've been hooked on Computer Science since I was 12, with a particular interest in botting. and when I was 15 i started seriously learning how to code in field of botting. after that when i 16-year-old i started learning web development.
 export default function SertificateSection() {
-	const allsertif = [{
-		image: Images.sertificate_cpfinalis01,
-		name: "sertificate cpfinalis",
-		link: "/view/sertif-finalis"
-	}, {
-		image: Images.sertificate_fedone01,
-		name: "course fe done"
-	}]
 	return (
 		<section
 			id="about"
@@ -26,18 +20,31 @@ export default function SertificateSection() {
 				color="primary">
 				My Sertificate
 			</Typography>
-			<div className="container relative flex flex-col-reverse gap-4 md:justify-between md:flex-row">
-				{allsertif.map((v) => (
-					<>
-						{v.link ? (<Link href={v.link}>
-							<Image className="md:w-[35rem]" alt={v.name} src={v.image} />
-							{/* <Typography>{v.name}</Typography> */}
-						</Link>) : <div>
-							<Image className="md:w-[31rem]" alt={v.name} src={v.image} />
-							{/* <Typography>{v.name}</Typography> */}
-						</div>}
-					</>
-				))}
+			<div className="container relative grid grid-cols-1 md:grid-cols-4 gap-10">
+				{allMySertif.map((v, index) => {
+					console.log(allMySertif.length % 2 != 0 && index === allMySertif.length - 1);
+					return (
+						<div
+							className={cn("group col-span-2 transition-all", {
+								"bg-black md:col-start-2 ": allMySertif.length % 2 != 0 && index === allMySertif.length - 1,
+							})}
+							key={index}>
+							{v.link ? (
+								<Link className="py-2 bg-indigo-200 px-2 flex flex-col gap-2 overflow-hidden" href={v.link}>
+									<Image draggable={false} className="w-full transition-all" alt={v.name} src={v.image} />
+									<Typography font={"poppins"} thick={"bold"} size={"subheading2"}>{v.name}</Typography>
+								</Link>
+							) : (
+								<div className="bg-indigo-200 px-2 py-2 flex flex-col gap-2 overflow-hidden">
+									<Zoom classDialog="">
+										<Image draggable={false} className="w-full transition-all max-h-[420px]" alt={v.name} src={v.image} />
+									</Zoom>
+									<Typography font={"poppins"} thick={"bold"} size={"subheading2"}>{v.name}</Typography>
+								</div>
+							)}
+						</div>
+					)
+				})}
 			</div>
 		</section>
 	);

@@ -1,6 +1,7 @@
 import RootLayout from "@/component/organisme/Root.layout";
 import "./globals.css";
 import "./preload.css";
+import 'react-medium-image-zoom/dist/styles.css'
 import { Metadata } from "next";
 export const metadata: Metadata = {
 	generator: "Next.js",

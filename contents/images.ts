@@ -36,6 +36,7 @@ import grammY from "@/public/images/icon/grammY.svg";
 import azure from "@/public/images/icon/microsoft-azure.svg";
 import gmail from "@/public/images/icon/gmail-icon.svg";
 import sertificate_cpfinalis01 from "@/public/images/sertificate/sertificate_cpfinalis01.png"
+import sertificate_cpfinalis02 from "@/public/images/sertificate/sertificate_cpfinalis02.jpg"
 import sertificate_fedone01 from "@/public/images/sertificate/sertificate_fedone01.png"
 const Images = {
 	github,
@@ -74,7 +75,8 @@ const Images = {
 	depublic3,
 	gmail,
 	sertificate_fedone01,
-	sertificate_cpfinalis01
+	sertificate_cpfinalis01,
+	sertificate_cpfinalis02
 };
 import man from "@/public/images/decoration/man-in-server.svg";
 import marked from "@/public/images/decoration/marked.svg";
